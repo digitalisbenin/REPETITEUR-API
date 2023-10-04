@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\V1\Auth\AuthController;
+use App\Http\Controllers\Api\V1\Auth\VerificationController;
+use App\Http\Controllers\Api\V1\Auth\ForgotPasswordController;
 
 use App\Http\Controllers\Api\V1\EnfantsController;
 use App\Http\Controllers\Api\V1\MatiereController;
@@ -23,6 +25,22 @@ use App\Http\Controllers\Api\V1\UserController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::middleware('json-response')->prefix('auth')->group(function () {
+    // route to register new user for the platform
+    Route::post("/register", [AuthController::class, 'register'])->name('api.register');
+    // route to log the user if he has already sign up
+    Route::post("/login", [AuthController::class, 'login'])->name('api.login');
+    // route to send reset link to email for password forgotten
+    Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
+    // route to send reset password for password forgotten
+    Route::post('/password/reset', [ForgotPasswordController::class, 'reset'])->name('passwords.reset');
+    // route to resend the email verification when the link has expired
+    Route::post('resend/', [VerificationController::class, 'resend'])->name('verification.resend');
+    // route to verify email after clicking on the link on email
+    Route::get('email/verify/{user}', [VerificationController::class, 'verify'])->name('verification.verify')
+        ->middleware('signed');
+});
 
 // route pour enfants
 Route::get('/enfants' ,[EnfantsController::class, 'index']);
@@ -72,6 +90,17 @@ Route::get('/parents/{id}', [ParentsController::class, 'show']);
 Route::get('/repetiteurs', [RepetiteurController::class, 'index']);
 Route::get('/repetiteurs/{id}', [RepetiteurController::class, 'show']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+Route::middleware(['auth:sanctum', 'json-response'])->group(function () {
+    Route::get("logout", [AuthController::class, 'logout']);
+
+    Route::post('/parents', [ParentsController::class, 'store']);
+    Route::put('/parents/{id}', [ParentsController::class, 'update']);
+    Route::delete('/parents/{id}', [ParentsController::class, 'destroy']);
+    Route::post('/repetiteurs', [RepetiteurController::class, 'store']);
+    Route::put('/repetiteurs/{id}', [RepetiteurController::class, 'update']);
+    Route::delete('/repetiteurs/{id}', [RepetiteurController::class, 'destroy']);
+
 });
