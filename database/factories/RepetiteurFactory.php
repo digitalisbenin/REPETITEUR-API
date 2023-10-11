@@ -19,17 +19,24 @@ class RepetiteurFactory extends Factory
     public function definition()
     {
         $users = User::all();
-        $enfants = Enfants::all();
         $matiere = Matiere::all();
+        $status= $this->faker->randomElement(['En cours','Terminer']);
+
         return [
             'fname' => $this->faker->word,
             'lname' => $this->faker->word,
-            'diplome_photo_path' => $this->faker->word,
+            'classe' => $this->faker->word,
+            'diplome_imageUrl' => $this->faker->word,
+            'profil_imageUrl' => $this->faker->word,
             'phone' => $this->faker->word,
             'adresse' => $this->faker->word,
-            'statut' => $this->faker->word,
+
+            'sexe' => $this->faker->word,
+            'grade' => $this->faker->word,
+            'ecole' => $this->faker->word,
+            'experience' => $this->faker->word,
+            'status' => $status,
             'user_id' => $users->random()->id,
-            'enfants_id' => $enfants->random()->id,
             'matiere_id' => $matiere->random()->id,
         ];
     }

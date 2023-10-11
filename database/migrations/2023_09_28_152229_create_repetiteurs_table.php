@@ -15,22 +15,21 @@ return new class extends Migration
     {
         Schema::create('repetiteurs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-
             $table->uuid('user_id');
-            $table->uuid('enfants_id')->nullable();
             $table->uuid('matiere_id')->nullable();
             $table->string('fname');
             $table->string('lname');
-            $table->string('diplome_photo_path', 2048)->nullable();
+            $table->string('classe');
+            $table->string('diplome_imageUrl')->nullable();
+            $table->string('profil_imageUrl')->nullable();
             $table->string('phone');
             $table->string('adresse');
-            $table->string('statut');
 
-
-            $table->foreign('enfants_id')
-                ->references('id')
-                ->on('enfants')
-                ->onDelete('cascade');
+            $table->string('sexe');
+            $table->string('grade');
+            $table->string('ecole');
+            $table->string('experience');
+            $table->enum('status', ['En cours','Terminer'])->default('En cours');
 
                 $table->foreign('user_id')
                 ->references('id')

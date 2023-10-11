@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\Auth\VerificationController;
 use App\Http\Controllers\Api\V1\Auth\ForgotPasswordController;
 
+use App\Http\Controllers\Api\V1\EpreuveController;
 use App\Http\Controllers\Api\V1\EnfantsController;
 use App\Http\Controllers\Api\V1\MatiereController;
 use App\Http\Controllers\Api\V1\ParentsController;
@@ -41,6 +42,13 @@ Route::middleware('json-response')->prefix('auth')->group(function () {
     Route::get('email/verify/{user}', [VerificationController::class, 'verify'])->name('verification.verify')
         ->middleware('signed');
 });
+
+// route pour epreuves
+Route::get('/epreuves' ,[EpreuveController::class, 'index']);
+Route::get('/epreuves/{id}', [EpreuveController::class, 'show']);
+Route::post('/epreuves', [EpreuveController::class, 'store']);
+Route::put('/epreuves/{id}', [EpreuveController::class, 'update']);
+Route::delete('/epreuves/{id}',[EpreuveController::class, 'destroy']);
 
 // route pour enfants
 Route::get('/enfants' ,[EnfantsController::class, 'index']);

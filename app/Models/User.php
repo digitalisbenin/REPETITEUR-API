@@ -9,9 +9,11 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Traits\Uuid;
 
 class User extends Authenticatable
 {
+    use Uuid;
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
@@ -23,10 +25,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
+    protected $fillable = [ 'role_id', 'name', 'email', 'email_verified_at', 'password', 'remember_token', 'current_team_id', 'profile_photo_path', 'created_at', 'updated_at'
+      
     ];
 
     /**
@@ -58,4 +58,17 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+     public function role()
+    {
+        return $this->belongsTo('App\Models\Role');
+    }
+    public function parents()
+    {
+        return $this->hasMany(Parents::class);
+    }
+
+    public function repetiteur()
+    {
+        return $this->hasMany(Repetiteur::class);
+    }
 }

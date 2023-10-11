@@ -24,7 +24,9 @@ class PayementResource extends JsonResource
        return[
         'id' => $this->id,
         'name'=>$this->name,
-        'description'=>$this->description,
+        'date'=>$this->date,
+        'mois'=>$this->mois,
+        'status'=>$this->status,
         'reference'=>$this->reference,
         'parents'=>new ParentsResource($this->parents),
        ];

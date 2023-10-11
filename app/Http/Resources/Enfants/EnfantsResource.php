@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Enfants;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Repetiteur\RepetiteurResource;
 use App\Http\Resources\Parents\ParentsResource;
 use App\Http\Resources\Matiere\MatiereResource;
 class EnfantsResource extends JsonResource
@@ -29,6 +30,7 @@ class EnfantsResource extends JsonResource
         'classe'=>$this->classe,
         'parents'=>new ParentsResource($this->parents),
         'matiere'=>new MatiereResource($this->matiere),
+        'repetiteur'=>new RepetiteurResource($this->repetiteur),
         'created_at'=>$this->created_at,
         'updated_at'=>$this->updated_at,
        ];

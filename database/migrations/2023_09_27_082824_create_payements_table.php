@@ -17,9 +17,16 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('parents_id');
             $table->string('name');
-            $table->string('description')->nullable();
+            $table->enum('mois', ['Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet', 'Aout','Spetembre','Octobre','Novembre','Decembre'])->default('Janvier');
+            $table->string('phone');
+             $table->enum('status', ['Impayer','Payer'])->default('Impayer');
+            $table->DateTime('date');
             $table->string('reference')->nullable();
             $table->timestamps();
+            $table->foreign('parents_id')
+            ->references('id')
+            ->on('parents')
+            ->onDelete('cascade');
         });
     }
 

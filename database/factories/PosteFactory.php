@@ -3,7 +3,7 @@
 namespace Database\Factories;
 use App\Models\Repetiteur;
 use App\Models\Enfants;
-
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,10 +20,12 @@ class PosteFactory extends Factory
     {
         $repetiteur = Repetiteur::all();
         $enfants = Enfants::all();
+        $user = User::all();
         return [
             'content' => $this->faker->word,
             'repetiteur_id' => $repetiteur->random()->id,
             'enfants_id' => $enfants->random()->id,
+            'user_id' => $user->random()->id,
         ];
     }
 }

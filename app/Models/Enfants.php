@@ -23,4 +23,12 @@ class Enfants extends Model
     {
         return $this->hasMany(Poste::class);
     }
+    public function matiere()
+    {
+        return $this->belongsTo(Matiere::class);
+    }
+    public function repetiteur()
+    {
+        return $this->belongsTo(Repetiteur::class);
+    }
 }

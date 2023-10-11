@@ -16,7 +16,7 @@ class RepetiteurSeeder extends Seeder
     {
         if (Repetiteur::count() == 0) {
             Repetiteur::factory()
-                ->count(15)
+                ->count(10)
                 ->create();
         }
     }

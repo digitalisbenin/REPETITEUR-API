@@ -24,13 +24,17 @@ class Repetiteur extends Model
         {
             return $this->hasMany(Poste::class);
         }
+     public function matiere()
+        {
+            return $this->belongsTo(Matiere::class);
+        }
 
        /**
      * The accessors to append to the model's array form.
      *
      * @var array<int, string>
      */
-    protected $appends = [
-        'diplome_photo_path',
-    ];
+    // protected $appends = [
+    //     'diplome_photo_path',
+    // ];
 }

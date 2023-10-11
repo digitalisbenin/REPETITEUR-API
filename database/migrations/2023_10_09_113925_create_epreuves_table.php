@@ -13,20 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('enfants', function (Blueprint $table) {
+        Schema::create('epreuves', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('fname');
-            $table->string('lname');
+            $table->uuid('matiere_id');
+            $table->string('name');
+            $table->string('epreuve');
             $table->string('classe');
-            $table->uuid('parents_id');
-            $table->uuid('matiere_id')->nullable();
+            $table->string('corrige');
             $table->timestamps();
-
-            $table->foreign('parents_id')
-            ->references('id')
-            ->on('parents')
-            ->onDelete('cascade');
-
 
             $table->foreign('matiere_id')
             ->references('id')
@@ -42,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('enfants');
+        Schema::dropIfExists('epreuves');
     }
 };

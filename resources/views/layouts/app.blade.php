@@ -22,20 +22,22 @@
 
         <div class="min-h-screen bg-gray-100">
             @livewire('navigation-menu')
+            @include('layouts.sidebar')
 
             <!-- Page Heading -->
-            @if (isset($header))
+            {{--  @if (isset($header))
                 <header class="bg-white shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>
-            @endif
+            @endif  --}}
 
             <!-- Page Content -->
-            <main>
+            <div class="p-10 sm:ml-60 mt-8">
+               
                 {{ $slot }}
-            </main>
+            </div>
         </div>
 
         @stack('modals')

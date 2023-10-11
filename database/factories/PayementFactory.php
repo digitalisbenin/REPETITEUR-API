@@ -17,10 +17,15 @@ class PayementFactory extends Factory
     public function definition()
     {
         $parents = Parents::all();
+        $statues = ['Impayer','Payer'];
+        $mois = ['Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet', 'Aout','Spetembre','Octobre','Novembre','Decembre'];
         return [
             'name' => $this->faker->word,
-            'description' => $this->faker->word,
+            'mois' => $this->faker->unique()->randomElement($mois),
+            'phone' => $this->faker->word,
             'reference' => $this->faker->word,
+            'status' => $this->faker->randomElement($statues),
+            'date' => $this->faker->dateTimeThisDecade(),
             'parents_id' => $parents->random()->id,
         ];
     }
