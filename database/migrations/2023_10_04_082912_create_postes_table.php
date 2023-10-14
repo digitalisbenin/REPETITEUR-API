@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('postes', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('repetiteur_id');
-            $table->uuid('enfants_id');
-            $table->uuid('user_id');
+            $table->uuid('repetiteur_id')->nullable();
+            $table->uuid('enfants_id')->nullable();
+            $table->uuid('parents_id')->nullable();
             $table->string('content',255);
             $table->timestamps();
 
@@ -30,10 +30,10 @@ return new class extends Migration
             ->references('id')
             ->on('enfants')
             ->onDelete('cascade');
-            
-            $table->foreign('user_id')
+
+            $table->foreign('parents_id')
             ->references('id')
-            ->on('users')
+            ->on('parents')
             ->onDelete('cascade');
         });
     }

@@ -61,13 +61,14 @@ class ShowParents extends Component
 
         $this->showDeleteModal = false;
 
-        $this->notify('Vous avez supprimé un parent');
+        $this->notify('Vous avez supprimé un parents');
     }
 
     public function save()
     {
         $this->validate();
         $this->editing->save();
+
         $this->notify('Enregistrement effectué avec succès');
         $this->showEditModal = false;
     }

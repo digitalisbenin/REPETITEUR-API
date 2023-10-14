@@ -10,7 +10,7 @@ class Repetiteur extends Model
 {
     use HasFactory,Uuid;
 
-    protected $fillable = ['fname', 'lname', 'matiere','diplome_photo_path','status','user_id','enfants_id','matiere_id'];
+    protected $fillable = ['fname', 'lname','classe', 'phone','diplome_imageUrl','profil_imageUrl','status','user_id','matiere_id','ecole','grade','sexe','experience','adresse','created_at', 'updated_at'];
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -9,7 +9,7 @@ class Epreuve extends Model
 {
     use HasFactory,Uuid;
 
-    protected $fillable = ['epreuve', 'classe','corrige','matiere_id'];
+    protected $fillable = ['name','epreuve', 'classe','corrige','matiere_id','created_at', 'updated_at'];
 
 
     public function matiere()

@@ -10,7 +10,7 @@ class Matiere extends Model
 {
     use HasFactory,Uuid;
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name','created_at', 'updated_at'];
     public function enfants()
         {
             return $this->hasMany(Enfants::class);

@@ -1,7 +1,13 @@
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-white p-4">
     <div class="flex items-center justify-between pb-4">
-
+        <div style=" color:rgb(38, 205, 29);  padding:auto">
+            @if (session()->has('message'))
+            <div class="alert alert-success shadow-md" role="alert" >
+                <h4>{{ session('message') }}</h4>
+            </div>
+        @endif
+          </div>
         <label for="table-search" class="sr-only"></label>
         <div class="relative">
             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -24,11 +30,7 @@
                 </svg>Ajouter</button>
         </div>
     </div>
-    @if (session()->has('message'))
-    <div class="alert alert-success">
-        {{ session('message') }}
-    </div>
-@endif
+
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>

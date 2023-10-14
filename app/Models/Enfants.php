@@ -11,7 +11,7 @@ class Enfants extends Model
 {
     use HasFactory,Uuid ;
 
-    protected $fillable = ['fname', 'lname','classe','parents_id','matiere_id'];
+    protected $fillable = ['fname', 'lname','classe','parents_id','matiere_id','created_at', 'updated_at'];
 
 
     public function parents()

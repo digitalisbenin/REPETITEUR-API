@@ -9,7 +9,7 @@ class Poste extends Model
 {
     use HasFactory,Uuid;
 
-    protected $fillable = ['repetiteur_id','enfants_id', 'content'];
+    protected $fillable = [ 'parents_id','repetiteur_id','enfants_id', 'content','created_at', 'updated_at'];
 
     public function repetiteur()
     {
@@ -19,5 +19,9 @@ class Poste extends Model
     public function enfants()
     {
         return $this->belongsTo(Enfants::class);
+    }
+    public function parents()
+    {
+        return $this->belongsTo(Parents::class);
     }
 }

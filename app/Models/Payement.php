@@ -9,7 +9,7 @@ class Payement extends Model
 {
     use HasFactory,Uuid;
 
-    protected $fillable = ['parents_id','name', 'description' ,'reference'];
+    protected $fillable = ['parents_id','name', 'phone' ,'reference','mois','status','date','created_at', 'updated_at'];
 
     public function parents()
     {

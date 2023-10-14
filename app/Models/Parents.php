@@ -11,7 +11,7 @@ class Parents extends Model
 {
     use HasFactory ,Uuid;
 
-    protected $fillable = ['user_id','fname', 'lname' ,'adresse','phone'];
+    protected $fillable = ['user_id','fname', 'lname' ,'adresse','phone','created_at', 'updated_at'];
 
     public function user()
     {
