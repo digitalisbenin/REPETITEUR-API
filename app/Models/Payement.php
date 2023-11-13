@@ -9,11 +9,11 @@ class Payement extends Model
 {
     use HasFactory,Uuid;
 
-    protected $fillable = ['parents_id','name', 'phone' ,'reference','mois','status','date','created_at', 'updated_at'];
+    protected $fillable = ['demande_id','name', 'phone' ,'reference','mois','status','date','annee','created_at', 'updated_at'];
 
-    public function parents()
+    public function demande()
     {
-        return $this->belongsTo(Parents::class);
+        return $this->belongsTo(Demande::class);
     }
 }
 

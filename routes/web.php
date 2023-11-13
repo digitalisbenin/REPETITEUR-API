@@ -10,6 +10,7 @@ use App\Http\Livewire\ShowPayements;
 use App\Http\Livewire\ShowRepetiteurs;
 use App\Http\Livewire\ShowPostes;
 use App\Http\Livewire\ShowParents;
+use App\Http\Livewire\ShowDemande;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
     Route::get('/show-enfants', ShowEnfants::class)->name('show-enfants');
+    Route::get('/show-demandes', ShowDemande::class)->name('show-demandes');
     Route::get('/show-epreuves', ShowEpreuves::class)->name('show-epreuves');
     Route::get('/show-matieres', ShowMatieres::class)->name('show-matieres');
     Route::get('/show-roles', ShowRoles::class)->name('show-roles');

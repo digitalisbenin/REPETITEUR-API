@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Enfants;
+namespace App\Http\Requests\Demande;
+
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Foundation\Http\FormRequest;
 
-class StoreEnfantsRequest extends FormRequest
+class UpdateDemandeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

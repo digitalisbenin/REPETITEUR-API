@@ -13,17 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('postes', function (Blueprint $table) {
+        Schema::create('media', function (Blueprint $table) {
             $table->uuid('id')->primary();
-
-            $table->uuid('demande_id')->nullable();
-            $table->string('content',255);
+            $table->string('media_url');
             $table->timestamps();
-
-            $table->foreign('demande_id')
-            ->references('id')
-            ->on('demandes')
-            ->onDelete('cascade');
         });
     }
 
@@ -34,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('postes');
+        Schema::dropIfExists('media');
     }
 };

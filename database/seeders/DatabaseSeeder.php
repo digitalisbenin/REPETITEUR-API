@@ -26,11 +26,10 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             MatiereSeeder::class,
             ParentsSeeder::class,
-            PayementSeeder::class,
             RepetiteurSeeder::class,
-            EnfantsSeeder::class,
+            DemandeSeeder::class,
             PosteSeeder::class,
-
+            PayementSeeder::class,
             EpreuveSeeder::class,
         ]);
     }

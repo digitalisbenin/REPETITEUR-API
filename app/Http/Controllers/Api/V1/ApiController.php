@@ -126,12 +126,13 @@ class ApiController extends Controller
      * Get the token array structure.
      *
      * @param $tokenResult
-     * @param null $user
+     * @param  $user
      * @return JsonResponse
      */
     protected function respondWithToken($tokenResult)
     {
         return $this->respond([
+            
             'access_token' => $tokenResult->plainTextToken,
             'token_type' => 'Bearer',
             'expired_at' => $tokenResult->accessToken->expired_at,

@@ -13,7 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('enfants', function (Blueprint $table) {
+        Schema::create('demandes', function (Blueprint $table) {
+
             $table->uuid('id')->primary();
             $table->string('fname');
             $table->string('lname');
@@ -21,6 +22,8 @@ return new class extends Migration
             $table->uuid('parents_id');
             $table->uuid('matiere_id')->nullable();
             $table->uuid('repetiteur_id')->nullable();
+            $table->enum('status', ['En cours','Validé','Non Validé'])->default('En cours');
+            $table->string('motif')->nullable();
             $table->timestamps();
 
             $table->foreign('repetiteur_id')
@@ -31,8 +34,7 @@ return new class extends Migration
             ->references('id')
             ->on('parents')
             ->onDelete('cascade');
-
-
+            
             $table->foreign('matiere_id')
             ->references('id')
             ->on('matieres')
@@ -47,6 +49,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('enfants');
+        Schema::dropIfExists('demandes');
     }
 };

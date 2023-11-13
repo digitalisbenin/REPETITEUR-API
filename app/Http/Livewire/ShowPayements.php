@@ -4,10 +4,8 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Session;
-
 use App\Models\Payement;
-
-use App\Models\User;
+use App\Models\Demande;
 
 class ShowPayements extends Component
 {
@@ -27,7 +25,8 @@ class ShowPayements extends Component
             'editing.reference' => 'required|min:1',
             'editing.phone' => 'required|min:1',
             'editing.date' => 'required|min:1',
-            'editing.parents_id' => 'required',
+            'editing.annee' => 'required|min:1',
+            'editing.demande_id' => 'required',
             'editing.status' => 'required',
         ];
     }
@@ -78,7 +77,7 @@ class ShowPayements extends Component
 
         return view('livewire.show-payements',[
             'payements'=> Payement::all(),
-            'users'=> User::all(),
+            'demande'=> Demande::all(),
         ]);
     }
 

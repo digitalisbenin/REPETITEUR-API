@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Enfants;
+namespace App\Http\Requests\Demande;
+
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Foundation\Http\FormRequest;
-
-class UpdateEnfantsRequest extends FormRequest
+class StoreDemandeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,6 +30,7 @@ class UpdateEnfantsRequest extends FormRequest
             'classe' => 'required',
             'parents_id' => 'required',
             'matiere_id' => 'required',
+            'repetiteur_id' => 'required',
         ];
     }
     public function failedValidation(Validator $validator)

@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Demande;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Payement;
-class PayementSeeder extends Seeder
+
+class DemandeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,9 +16,9 @@ class PayementSeeder extends Seeder
     public function run()
     {
         //
-        if (Payement::count() == 0) {
-            Payement::factory()
-                ->count(11)
+        if (Demande::count() == 0) {
+            Demande::factory()
+                ->count(15)
                 ->create();
         }
     }

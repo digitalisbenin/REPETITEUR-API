@@ -39,10 +39,7 @@
                     CONTENT
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    ENFANTS
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    REPETITEURS
+                    DEMANDE
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Action
@@ -58,11 +55,9 @@
                         {{ $poste->content }}
                     </th>
                     <td class="px-6 py-4">
-                        {{ $poste->enfants->fname }}  {{ $poste->enfants->lname }}
+                         {{ $poste->demande->fname }}   {{ $poste->demande->lname }}
                     </td>
-                    <td class="px-6 py-4">
-                        {{ $poste->repetiteur->fname }} {{ $poste->repetiteur->lname }}
-                    </td>
+
                     <td class="flex items-center px-6 py-4 space-x-3">
                         <a href="#" wire:click="edit({{ $poste }})" wire:loading.attr="disabled"
                             class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Modifier</a>
@@ -116,20 +111,20 @@
             </div>
             <div class="mt-4">
 
-                <label for="editing.enfants_id"
+                <label for="editing.demande_id"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ENFANTS</label>
-                <select id="editing.enfant_id" wire:model.defer="editing.enfants_id"
+                <select id="editing.enfant_id" wire:model.defer="editing.demande_id"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Selectionnez le Répétiteur</option>
-                    @foreach($enfants as $enfant)
+                    @foreach($demande as $enfant)
                     <option value="{{ $enfant->id }}">{{ $enfant->fname }}  {{ $enfant->lname }}</option>
                     @endforeach
                 </select>
 
 
-                <x-input-error for="editing.enfants_id" class="mt-2" />
+                <x-input-error for="editing.demande_id" class="mt-2" />
             </div>
-            <div class="mt-4">
+            {{--  <div class="mt-4">
 
                 <label for="editing.repetiteur_id"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">REPETITEUR</label>
@@ -143,7 +138,7 @@
 
 
                 <x-input-error for="editing.repetiteur_id" class="mt-2" />
-            </div>
+            </div>  --}}
 
             {{--  <div class="mt-4">
 

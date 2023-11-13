@@ -43,6 +43,15 @@
                     MATIERE
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    REPETITEUR
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    STATUS
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    MOTIF
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Action
                 </th>
             </tr>
@@ -65,6 +74,15 @@
                 </td>
                 <td class="px-6 py-4">
                     {{ $enfant->matiere->name }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ $enfant->repetiteur->fname }}  {{ $enfant->repetiteur->lname }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ $enfant->status }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ $enfant->motif }}
                 </td>
 
                 <td class="flex items-center px-6 py-4 space-x-3">
@@ -123,6 +141,27 @@
 
                 <x-input-error for="editing.classe" class="mt-2" />
             </div>
+            <div class="mt-4">
+
+                <label for="editing.status"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+                <select id="editing.status" wire:model.defer="editing.status"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="En cours">Selectionner le status</option>
+                    <option value="En cours">En cours</option>
+                    <option value="Validé">Validé</option>
+                    <option value="Non Validé">Non Validé</option>
+                </select>
+                <x-input-error for="editing.status" class="mt-2" />
+            </div>
+
+
+
+            <div class="mt-4">
+                <x-input type="text" class="mt-1 block w-full" placeholder="{{ __('Motif') }}" x-ref="editing.motif" wire:model.defer="editing.motif" />
+
+                <x-input-error for="editing.motif" class="mt-2" />
+            </div>
 
             <div class="mt-4">
 
@@ -132,7 +171,7 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Selectionnez le Parents</option>
                     @foreach($parents as $parent)
-                    <option value="{{ $parent->id }}">{{ $parent->fname }}</option>
+                    <option value="{{ $parent->id }}">{{ $parent->fname }}  {{ $parent->lname }}</option>
                     @endforeach
                 </select>
 

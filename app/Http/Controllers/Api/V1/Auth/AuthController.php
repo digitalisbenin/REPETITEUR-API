@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Auth;
 
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Str;
 use App\Models\Role;
@@ -108,4 +109,34 @@ class AuthController extends ApiController
         auth()->user()->currentAccessToken()->delete();
         return response(null, 204);
     }
+
+
+  public function getUserInfo(Request $request)
+    {
+
+        if ($user = $request->user()) {
+            // Récupérez l'utilisateur authentifié.
+            $user = Auth::user();
+
+            // Récupérez le token d'authentification de l'utilisateur (si vous utilisez Passport).
+            $accessToken = $user->token();
+
+            // Récupérez toutes les informations de l'utilisateur et le token.
+            $userInfo = [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'access_token' => $accessToken->accessToken,
+                'token_type' => $accessToken->token->token_type,
+                'expires_at' => $accessToken->token->expires_at,
+            ];
+
+            return response()->json($userInfo);
+        } else {
+            // L'utilisateur n'est pas authentifié, renvoyez une réponse appropriée.
+            return response()->json(['message' => 'Utilisateur non authentifiés'], 401);
+        }
+    }
 }
+
+

@@ -28,10 +28,13 @@ class StoreRepetiteurRequest extends FormRequest
             'fname' => 'required',
             'lname' => 'required',
             'phone' => 'required',
-            'addrese' => 'required',
-            'user_id' => 'required',
-            'enfants_id' => 'required',
-            'matiere_id' => 'required',
+            'adresse' => 'required',
+            'description' => 'required',
+            'classe' => 'required',
+            'sexe' => 'required',
+            'grade' => 'required',
+             'user_id' => 'required',
+             'matiere_id' => 'required',
         ];
     }
     public function failedValidation(Validator $validator)

@@ -1,6 +1,8 @@
 <?php
 
 namespace Database\Factories;
+
+use App\Models\Demande;
 use App\Models\Parents;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -16,17 +18,18 @@ class PayementFactory extends Factory
      */
     public function definition()
     {
-        $parents = Parents::all();
+        $demande = Demande::all();
         $statues = ['Impayer','Payer'];
-        $mois = ['Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet', 'Aout','Spetembre','Octobre','Novembre','Decembre'];
+        $mois = ['Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet', 'Aout','Septembre','Octobre','Novembre','Decembre'];
         return [
             'name' => $this->faker->word,
             'mois' => $this->faker->unique()->randomElement($mois),
             'phone' => $this->faker->word,
             'reference' => $this->faker->word,
+            'annee' => $this->faker->word,
             'status' => $this->faker->randomElement($statues),
             'date' => $this->faker->dateTimeThisDecade(),
-            'parents_id' => $parents->random()->id,
+            'demande_id' => $demande->random()->id,
         ];
     }
 }

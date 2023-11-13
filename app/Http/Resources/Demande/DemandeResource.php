@@ -1,19 +1,14 @@
 <?php
 
-namespace App\Http\Resources\Enfants;
-use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\Repetiteur\RepetiteurResource;
-use App\Http\Resources\Parents\ParentsResource;
+namespace App\Http\Resources\Demande;
+
 use App\Http\Resources\Matiere\MatiereResource;
-class EnfantsResource extends JsonResource
+use App\Http\Resources\Parents\ParentsResource;
+use App\Http\Resources\Repetiteur\RepetiteurResource;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class DemandeResource extends JsonResource
 {
-      /**
-     * Indicates if the resource's collection keys should be preserved.
-     *
-     * @var bool
-     */
-    public $preserveKeys = true;
     /**
      * Transform the resource into an array.
      *

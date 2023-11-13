@@ -17,8 +17,8 @@ class Parents extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function enfants()
+    public function demande()
     {
-        return $this->hasMany(Enfants::class);
+        return $this->hasMany(Demande::class);
     }
 }

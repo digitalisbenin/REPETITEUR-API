@@ -10,15 +10,16 @@ class Repetiteur extends Model
 {
     use HasFactory,Uuid;
 
-    protected $fillable = ['fname', 'lname','classe', 'phone','diplome_imageUrl','profil_imageUrl','status','user_id','matiere_id','ecole','grade','sexe','experience','adresse','created_at', 'updated_at'];
+    protected $fillable = ['fname', 'lname','classe', 'phone','diplome_imageUrl','profil_imageUrl','status','user_id','matiere_id','ecole','grade','sexe','experience','adresse','description', 'dateLieuNaissance','situationMatrimoniale','niveauEtude','heureDisponibilite','identite','casierJudiciaire','attestationResidence', 'created_at', 'updated_at'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function enfants()
+    public function demande()
         {
-            return $this->belongsTo(Enfants::class);
+            return $this->belongsTo(Demande::class);
         }
      public function poste()
         {

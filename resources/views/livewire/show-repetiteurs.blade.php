@@ -51,6 +51,21 @@
                     PROFIL
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    DESCRIPTION
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    DATE ET LIEU DE NAISSANCE
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    NIVEAU D ETUDE
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    SITUATION MATRIMONIALES
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    HEURE DE DISPONIBILITES
+                </th>
+                <th scope="col" class="px-6 py-3">
                     SEXE
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -65,6 +80,15 @@
                 </th>
                 <th scope="col" class="px-6 py-3">
                     UTILISATEUR
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    IDENTITE
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    CASIER JUDICIAIRES
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    ATTESTATION DE RESIDENCE
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Action
@@ -94,10 +118,26 @@
                     {{ $repetiteur->status }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $repetiteur->diplome_imageUrl }}
+                    <a href="{{ $repetiteur->diplome_imageUrl }}" target="_blank">Voir</a>
+                    {{--  <embed src="{{ $repetiteur->diplome_imageUrl }}" type="application/pdf" width="90%" height="60px" />  --}}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $repetiteur->profil_imageUrl }}
+                    <img src="{{ $repetiteur->profil_imageUrl }}" alt="" srcset="">
+                </td>
+                <td class="px-6 py-4">
+                    {{ $repetiteur->description }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ $repetiteur->dateLieuNaissance }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ $repetiteur->niveauEtude }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ $repetiteur->situationMatrimoniale }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ $repetiteur->heureDisponibilite }}
                 </td>
                 <td class="px-6 py-4">
                     {{ $repetiteur->sexe }}
@@ -113,6 +153,18 @@
                 </td>
                 <td class="px-6 py-4">
                     {{ $repetiteur->user->name }}
+                </td>
+                <td class="px-6 py-4">
+                    <a href="{{ $repetiteur->identite }}" target="_blank">Voir</a>
+                    {{--  <embed src="{{ $repetiteur->diplome_imageUrl }}" type="application/pdf" width="90%" height="60px" />  --}}
+                </td>
+                <td class="px-6 py-4">
+                    <a href="{{ $repetiteur->casierJudiciaire }}" target="_blank">Voir</a>
+                    {{--  <embed src="{{ $repetiteur->diplome_imageUrl }}" type="application/pdf" width="90%" height="60px" />  --}}
+                </td>
+                <td class="px-6 py-4">
+                    <a href="{{ $repetiteur->attestationResidence }}" target="_blank">Voir</a>
+                    {{--  <embed src="{{ $repetiteur->diplome_imageUrl }}" type="application/pdf" width="90%" height="60px" />  --}}
                 </td>
 
 
@@ -183,39 +235,108 @@
                 <x-input-error for="editing.adresse" class="mt-2" />
             </div>
             <div class="mt-4">
-                <x-input type="text" class="mt-1 block w-full" placeholder="{{ __('SEXE') }}" x-ref="editing.sexe" wire:model.defer="editing.sexe" />
 
-                <x-input-error for="editing.sexe" class="mt-2" />
+                <label for="editing.sexe"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sexe</label>
+                <select id="editing.sexe" wire:model.defer="editing.sexe"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="Homme">Selectionner le sexe</option>
+                    <option value="Homme">Homme</option>
+                    <option value="Femme">Femme</option>
+                </select>
+                <x-input-error for="editing.status" class="mt-2" />
             </div>
             <div class="mt-4">
-                <x-input type="text" class="mt-1 block w-full" placeholder="{{ __('DIPLOME') }}" x-ref="editing.diplome_imageUrl" wire:model.defer="editing.diplome_imageUrl" />
+                <label for="editing.diplome_imageUrl"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Diplome</label>
+                <x-input type="file" wire:model="pdffile" accept=".pdf" class="mt-1 block w-full"  />
 
                 <x-input-error for="editing.diplome_imageUrl" class="mt-2" />
             </div>
             <div class="mt-4">
-                <x-input type="text" class="mt-1 block w-full" placeholder="{{ __('PROFIL') }}" x-ref="editing.profil_imageUrl" wire:model.defer="editing.profil_imageUrl" />
+                <label for="editing.identite"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pièces d identité</label>
 
+                <x-input type="file" wire:model="pdffileidentite" accept=".pdf" class="mt-1 block w-full"/>
+
+                <x-input-error for="editing.identite" class="mt-2" />
+            </div>
+            <div class="mt-4">
+                <label for="editing.casierJudiciaire"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Casier Judiciaire</label>
+                <x-input type="file" wire:model="pdffilecasierJudiciaire" accept=".pdf" class="mt-1 block w-full" placeholder="{{ __('') }}" />
+
+                <x-input-error for="editing.casierJudiciaire" class="mt-2" />
+            </div>
+            <div class="mt-4">
+                <label for="editing.attestationResidence"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Attestation de résidence</label>
+                <x-input type="file" wire:model="pdffileattestationResidence" accept=".pdf" class="mt-1 block w-full" placeholder="{{ __('') }}"/>
+
+                <x-input-error for="editing.attestationResidence" class="mt-2" />
+            </div>
+            <div class="mt-4">
+                <label for="editing.profil_imageUrl"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Photo complète</label>
+                <x-input type="file" wire:model="file" id="file" name="file"  class="mt-1 block w-full" placeholder="{{ __('PROFIL') }}" x-ref="editing.profil_imageUrl" />
                 <x-input-error for="editing.profil_imageUrl" class="mt-2" />
             </div>
             <div class="mt-4">
-                <x-input type="text" class="mt-1 block w-full" placeholder="{{ __('GRADE') }}" x-ref="editing.profil_imageUrl" wire:model.defer="editing.profil_imageUrl" />
-
-                <x-input-error for="editing.profil_imageUrl" class="mt-2" />
+                <x-input type="text" class="mt-1 block w-full" placeholder="{{ __('GRADE') }}" x-ref="editing.grade" wire:model.defer="editing.grade" />
+                <x-input-error for="editing.grade" class="mt-2" />
             </div>
             <div class="mt-4">
-                <x-input type="text" class="mt-1 block w-full" placeholder="{{ __('ECOLE DE PROVENANCE') }}" x-ref="editing.profil_imageUrl" wire:model.defer="editing.profil_imageUrl" />
+                <x-input type="text" class="mt-1 block w-full" placeholder="{{ __('ECOLE DE PROVENANCE') }}" x-ref="editing.ecole" wire:model.defer="editing.ecole" />
 
-                <x-input-error for="editing.profil_imageUrl" class="mt-2" />
+                <x-input-error for="editing.ecole" class="mt-2" />
             </div>
             <div class="mt-4">
-                <x-input type="text" class="mt-1 block w-full" placeholder="{{ __('EXPERIENCE') }}" x-ref="editing.profil_imageUrl" wire:model.defer="editing.profil_imageUrl" />
+                <x-input type="text" class="mt-1 block w-full" placeholder="{{ __('EXPERIENCE') }}" x-ref="editing.experience" wire:model.defer="editing.experience" />
 
-                <x-input-error for="editing.profil_imageUrl" class="mt-2" />
+                <x-input-error for="editing.experience" class="mt-2" />
+            </div>
+
+            <div class="mt-4">
+                <label for="editing.dateLieuNaissance"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date et lieu de naissance</label>
+                <x-input type="text" class="mt-1 block w-full" placeholder="{{ __('EX: 20/10/1990/Cotonou') }}" x-ref="editing.dateLieuNaissance" wire:model.defer="editing.dateLieuNaissance" />
+
+                <x-input-error for="editing.dateLieuNaissance" class="mt-2" />
+            </div>
+
+            <div class="mt-4">
+                <x-input type="text" class="mt-1 block w-full" placeholder="{{ __('SITUATION MATRIMONIALE') }}" x-ref="editing.situationMatrimoniale" wire:model.defer="editing.situationMatrimoniale" />
+
+                <x-input-error for="editing.situationMatrimoniale" class="mt-2" />
+            </div>
+
+            <div class="mt-4">
+                <x-input type="text" class="mt-1 block w-full" placeholder="{{ __('NIVEAU D ETUDE') }}" x-ref="editing.niveauEtude" wire:model.defer="editing.niveauEtude" />
+
+                <x-input-error for="editing.niveauEtude" class="mt-2" />
+            </div>
+
+            <div class="mt-4">
+                <x-input type="text" class="mt-1 block w-full" placeholder="{{ __('HEURE DE DISPONIBILITES') }}" x-ref="editing.heureDisponibilite" wire:model.defer="editing.heureDisponibilite" />
+                <x-input-error for="editing.heureDisponibilite" class="mt-2" />
             </div>
             <div class="mt-4">
-                <x-input type="text" class="mt-1 block w-full" placeholder="{{ __('STATUS') }}" x-ref="editing.profil_imageUrl" wire:model.defer="editing.profil_imageUrl" />
+                <x-input type="text" class="mt-1 block w-full" placeholder="{{ __('DESCRIPTION') }}" x-ref="editing.description" wire:model.defer="editing.description" />
 
-                <x-input-error for="editing.profil_imageUrl" class="mt-2" />
+                <x-input-error for="editing.description" class="mt-2" />
+            </div>
+
+            <div class="mt-4">
+
+                <label for="editing.status"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+                <select id="editing.status" wire:model.defer="editing.status"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="En cours">Selectionner le status</option>
+                    <option value="En cours">En cours</option>
+                    <option value="Terminer">Terminer</option>
+                </select>
+                <x-input-error for="editing.status" class="mt-2" />
             </div>
 
             <div class="mt-4">

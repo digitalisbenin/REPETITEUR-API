@@ -20,11 +20,18 @@ return new class extends Migration
             $table->string('fname');
             $table->string('lname');
             $table->string('classe');
-            $table->string('diplome_imageUrl')->nullable();
-            $table->string('profil_imageUrl')->nullable();
+            $table->string('diplome_imageUrl');
+            $table->string('profil_imageUrl');
             $table->string('phone');
             $table->string('adresse');
-
+            $table->string('description');
+            $table->string('dateLieuNaissance');
+            $table->string('situationMatrimoniale');
+            $table->string('niveauEtude');
+            $table->string('heureDisponibilite');
+            $table->string('identite');
+            $table->string('casierJudiciaire');
+            $table->string('attestationResidence');
             $table->string('sexe');
             $table->string('grade');
             $table->string('ecole');

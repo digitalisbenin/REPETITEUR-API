@@ -9,16 +9,16 @@ class Poste extends Model
 {
     use HasFactory,Uuid;
 
-    protected $fillable = [ 'parents_id','repetiteur_id','enfants_id', 'content','created_at', 'updated_at'];
+    protected $fillable = ['demande_id', 'content','created_at', 'updated_at'];
 
     public function repetiteur()
     {
         return $this->belongsTo(Repetiteur::class);
     }
 
-    public function enfants()
+    public function demande()
     {
-        return $this->belongsTo(Enfants::class);
+        return $this->belongsTo(Demande::class);
     }
     public function parents()
     {

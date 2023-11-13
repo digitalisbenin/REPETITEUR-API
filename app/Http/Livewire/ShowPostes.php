@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Enfants;
+use App\Models\Demande;
 use Livewire\Component;
 use Illuminate\Support\Facades\Session;
 
@@ -27,8 +27,8 @@ class ShowPostes extends Component
         {
             return [
                 'editing.content' => 'required|min:2',
-                'editing.enfants_id' => 'required',
-                'editing.repetiteur_id' => 'required',
+                'editing.demande_id' => 'required',
+
                 //'editing.user_id' => 'required',
 
             ];
@@ -75,9 +75,9 @@ class ShowPostes extends Component
         {
             return view('livewire.show-postes',[
                 'postes'=> Poste::all(),
-                'enfants'=> Enfants::all(),
-                'repetiteurs'=> Repetiteur::all(),
-                'users'=> User::all(),
+                'demande'=>Demande::all(),
+                //'repetiteurs'=> Repetiteur::all(),
+                //'users'=> User::all(),
             ]);
         }
 

@@ -28,7 +28,7 @@ class StoreParentsRequest extends FormRequest
             'fname' => 'required',
             'lname' => 'required',
             'phone' => 'required',
-            'addrese' => 'required',
+            'adresse' => 'required',
             'user_id' => 'required',
         ];
     }

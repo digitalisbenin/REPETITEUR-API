@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 use App\Models\Repetiteur;
-use App\Models\Enfants;
+use App\Models\Demande;
 use App\Models\Parents;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -19,14 +19,14 @@ class PosteFactory extends Factory
      */
     public function definition()
     {
-        $repetiteur = Repetiteur::all();
-        $enfants = Enfants::all();
-        $parents = Parents::all();
+       // $repetiteur = Repetiteur::all();
+        $demande = Demande::all();
+       // $parents = Parents::all();
         return [
             'content' => $this->faker->word,
-            'repetiteur_id' => $repetiteur->random()->id,
-            'enfants_id' => $enfants->random()->id,
-            'parents_id' => $parents->random()->id,
+
+            'demande_id' => $demande->random()->id,
+
         ];
     }
 }

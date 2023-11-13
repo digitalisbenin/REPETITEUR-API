@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Enfants;
-use Illuminate\Http\Request;
+namespace App\Http\Resources\Demande;
+
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class EnfantsCollection extends ResourceCollection
+class DemandeCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.

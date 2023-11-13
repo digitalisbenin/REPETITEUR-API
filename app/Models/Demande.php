@@ -1,17 +1,19 @@
 <?php
 
 namespace App\Models;
-use App\Traits\Uuid;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Traits\Uuid;
 
-class Enfants extends Model
+
+class Demande extends Model
 {
     use HasFactory,Uuid ;
 
-    protected $fillable = ['fname', 'lname','classe','parents_id','matiere_id','created_at', 'updated_at'];
+    protected $fillable = ['fname', 'lname','classe','parents_id','matiere_id','repetiteur_id','status','motif', 'created_at', 'updated_at'];
 
 
     public function parents()

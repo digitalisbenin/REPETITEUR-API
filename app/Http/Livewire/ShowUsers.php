@@ -21,7 +21,7 @@ class ShowUsers extends Component
         return [
             'editing.name' => 'required|min:2',
             'editing.email' => 'required',
-            'editing.password' => 'required',
+           // 'editing.password' => 'required',
             'editing.role_id' => 'required',
 
 

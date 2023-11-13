@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\Auth\VerificationController;
 use App\Http\Controllers\Api\V1\Auth\ForgotPasswordController;
-
+use App\Http\Controllers\Api\V1\MediaController;
 use App\Http\Controllers\Api\V1\EpreuveController;
 use App\Http\Controllers\Api\V1\EnfantsController;
 use App\Http\Controllers\Api\V1\MatiereController;
@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\V1\PosteController;
 use App\Http\Controllers\Api\V1\RepetiteurController;
 use App\Http\Controllers\Api\V1\RoleController;
 use App\Http\Controllers\Api\V1\UserController;
+use App\Http\Controllers\Api\V1\DemandeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,8 @@ Route::middleware('json-response')->prefix('auth')->group(function () {
     Route::post("/register", [AuthController::class, 'register'])->name('api.register');
     // route to log the user if he has already sign up
     Route::post("/login", [AuthController::class, 'login'])->name('api.login');
+
+    Route::post("/getUserInfo", [AuthController::class, 'getUserInfo'])->name('api.getUserInfo');
     // route to send reset link to email for password forgotten
     Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
     // route to send reset password for password forgotten
@@ -42,6 +45,15 @@ Route::middleware('json-response')->prefix('auth')->group(function () {
     Route::get('email/verify/{user}', [VerificationController::class, 'verify'])->name('verification.verify')
         ->middleware('signed');
 });
+
+// route pour epreuves
+Route::get('/demandes' ,[DemandeController::class, 'index']);
+Route::get('/demandes/{id}', [DemandeController::class, 'show']);
+Route::post('/demandes', [DemandeController::class, 'store']);
+Route::put('/demandes/{id}', [DemandeController::class, 'update']);
+Route::delete('/demandes/{id}',[DemandeController::class, 'destroy']);
+
+
 
 // route pour epreuves
 Route::get('/epreuves' ,[EpreuveController::class, 'index']);
@@ -89,7 +101,8 @@ Route::post('/postes', [PosteController::class, 'store']);
 Route::put('/postes/{id}', [PosteController::class, 'update']);
 Route::delete('/postes/{id}', [PosteController::class, 'destroy']);
 
-
+// route media
+Route::post('/medias', [MediaController::class, 'store']);
 
 //route pour les parents
 Route::get('/parents', [ParentsController::class, 'index']);
@@ -103,7 +116,9 @@ Route::get('/repetiteurs/{id}', [RepetiteurController::class, 'show']);
 // });
 Route::middleware(['auth:sanctum', 'json-response'])->group(function () {
     Route::get("logout", [AuthController::class, 'logout']);
-
+    Route::get('/profile', function(Request $request) {
+        return auth()->user();
+    });
     Route::post('/parents', [ParentsController::class, 'store']);
     Route::put('/parents/{id}', [ParentsController::class, 'update']);
     Route::delete('/parents/{id}', [ParentsController::class, 'destroy']);

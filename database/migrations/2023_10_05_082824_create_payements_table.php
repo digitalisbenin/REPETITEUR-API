@@ -15,17 +15,19 @@ return new class extends Migration
     {
         Schema::create('payements', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('parents_id');
+            $table->uuid('demande_id');
             $table->string('name');
-            $table->enum('mois', ['Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet', 'Aout','Spetembre','Octobre','Novembre','Decembre'])->default('Janvier');
+            $table->enum('mois', ['Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet', 'Aout','Septembre','Octobre','Novembre','Decembre'])->default('Janvier');
             $table->string('phone');
              $table->enum('status', ['Impayer','Payer'])->default('Impayer');
             $table->DateTime('date');
+            $table->string('annee');
             $table->string('reference')->nullable();
             $table->timestamps();
-            $table->foreign('parents_id')
+
+            $table->foreign('demande_id')
             ->references('id')
-            ->on('parents')
+            ->on('demandes')
             ->onDelete('cascade');
         });
     }
