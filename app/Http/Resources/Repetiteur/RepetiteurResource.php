@@ -42,6 +42,8 @@ class RepetiteurResource extends JsonResource
         'casierJudiciaire'=>$this->casierJudiciaire,
         'attestationResidence'=>$this->attestationResidence,
         'grade'=>$this->grade,
+        'status'=>$this->status,
+        'experience'=>$this->experience,
         'ecole'=>$this->ecole,
         'user'=> new UserResource($this->user),
         'matiere'=> new MatiereResource($this->matiere),
