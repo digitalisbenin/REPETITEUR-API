@@ -8,31 +8,28 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->uuid('role_id');
+            $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->foreignId('current_team_id')->nullable();
-            $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
-            $table->foreign('role_id')
-            ->references('id')
-            ->on('roles')
-            ->onDelete('cascade');
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('users');
     }
