@@ -6,9 +6,11 @@ use Livewire\Component;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 class ShowUsers extends Component
 {
+
+    use LivewireAlert;
     public User $deleting;
     public User $editing;
     public $showDeleteModal = false;

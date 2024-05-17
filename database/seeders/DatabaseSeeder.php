@@ -24,17 +24,17 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
-            MatiereSeeder::class,
-            ClasseSeeder::class,
-            ParentsSeeder::class,
+           // MatiereSeeder::class,
+           // ClasseSeeder::class,
+            //ParentsSeeder::class,
            // EnfantsSeeder::class,
-            TarificationSeeder::class,
+           // TarificationSeeder::class,
            // RepetiteurSeeder::class,
            // DemandeSeeder::class,
            // PosteSeeder::class,
            // RepetiteurMatiereClasseSeeder::class,
            // PayementSeeder::class,
-            EpreuveSeeder::class,
+          //  EpreuveSeeder::class,
         ]);
     }
 }

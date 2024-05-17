@@ -17,7 +17,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('ecoleUrl');
             $table->string('name');
-            $table->string('description');
+            $table->longText('description');
             $table->string('resultat');
             $table->timestamps();
         });

@@ -7,12 +7,13 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Support\Facades\Session;
 
 class ShowEcole extends Component
 {
 
+    use LivewireAlert;
     use WithFileUploads;
     public Ecole $deleting;
     public Ecole $editing;
@@ -90,8 +91,12 @@ class ShowEcole extends Component
         $this->deleting->delete();
 
         $this->showDeleteModal = false;
-
-        $this->notify('Vous avez supprimé une école');
+        $this->alert('success', 'Vous avez supprimé une école', [
+            'position' => 'top-end',
+            'timer' => 5000,
+            'toast' => true,
+           ]);
+        //$this->notify('Vous avez supprimé une école');
     }
 
     public function save()
@@ -140,7 +145,12 @@ class ShowEcole extends Component
                 $ecole->resultat = $this->editing->resultat;
                 $ecole->ecoleUrl = $url;
                 $ecole->save();
-                $this->notify('Modification effectuée avec succès');
+               // $this->notify('Modification effectuée avec succès');
+               $this->alert('success', 'Modification effectué avec succès', [
+                'position' => 'top-end',
+                'timer' => 5000,
+                'toast' => true,
+               ]);
                 $this->showEditModal = false;
             }
 
@@ -152,7 +162,12 @@ class ShowEcole extends Component
                 'resultat' => $this->editing->resultat,
                 'ecoleUrl' => $url,
             ]);
-            $this->notify('Enregistrement effectué avec succès');
+            $this->alert('success', 'Enregistrement effectué avec succès', [
+                'position' => 'top-end',
+                'timer' => 5000,
+                'toast' => true,
+               ]);
+            //$this->notify('Enregistrement effectué avec succès');
             $this->showEditModal = false;
         }
     }

@@ -34,7 +34,7 @@ return new class extends Migration
             ->references('id')
             ->on('repetiteurs')
             ->onDelete('cascade');
-
+            $table->unique(['repetiteur_id', 'matiere_id', 'classe_id']);
         });
     }
 

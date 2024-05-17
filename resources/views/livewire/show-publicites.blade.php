@@ -9,19 +9,19 @@
     <div class="flex items-center justify-between pb-4">
 
         <div class="">
-            <label for="table-search" class="block mb-2 text-3xl font-medium text-gray-900 dark:text-white">Liste des publicités</label>
+            <label for="table-search" class="block mb-2 text-3xl font-medium text-gray-900 uppercase  ">Liste des publicités</label>
 
 
         </div>
         <div>
-            <button wire:click="create" type="button" class="inline-flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"><svg class="w-[14px] h-[14px] text-white dark:text-white mt-1 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+            <button wire:click="create" type="button" class="inline-flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 "><svg class="w-[14px] h-[14px] text-white  mt-1 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 1v16M1 9h16" />
                 </svg>Ajouter</button>
         </div>
     </div>
 
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <table class="w-full text-sm text-left text-gray-500">
+        <thead class="text-lg text-gray-700 uppercase bg-gray-50 ">
             <tr>
                 <th scope="col" class="px-6 py-3">
                     Titre
@@ -37,9 +37,9 @@
         </thead>
         <tbody>
             @foreach ($publicite as $epreuve)
-            <tr class="text-lg bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <tr class="text-lg bg-white border-b  hover:bg-gray-50 ">
 
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                     {{ $epreuve->titre }}
                 </th>
                 <td class="px-6 py-4">
@@ -52,8 +52,8 @@
 
 
                 <td class="flex items-center px-6 py-4 space-x-3">
-                    <a href="#" wire:click="edit({{ $epreuve }})" wire:loading.attr="disabled" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Modifier</a>
-                    <a href="#" wire:click="delete({{ $epreuve }})" wire:loading.attr="disabled" class="font-medium text-red-600 dark:text-red-500 hover:underline">Supprimer</a>
+                    <a href="#" wire:click="edit({{ $epreuve }})" wire:loading.attr="disabled" class="font-medium text-blue-600  hover:underline">Modifier</a>
+                    <a href="#" wire:click="delete({{ $epreuve }})" wire:loading.attr="disabled" class="font-medium text-red-600  hover:underline">Supprimer</a>
                 </td>
             </tr>
             @endforeach
@@ -94,13 +94,13 @@
 
         <x-slot name="content">
             <div class="mt-4">
-                <label for="editing.publiciteUrl" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">UN TITRE</label>
+                <label for="editing.publiciteUrl" class="block mb-2 text-xl font-medium text-gray-900 ">UN TITRE</label>
                 <x-input type="text" class="mt-1 block w-full text-xl" placeholder="{{ __('TITRE') }}" x-ref="editing.titre" wire:model.defer="editing.titre" />
 
                 <x-input-error for="editing.titre" class="mt-2" />
             </div>
             <div class="mt-4">
-                <label for="editing.publiciteUrl" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">ENTRER UNE IMAGE</label>
+                <label for="editing.publiciteUrl" class="block mb-2 text-xl font-medium text-gray-900 ">ENTRER UNE IMAGE</label>
                 <x-input type="file" wire:model="file" id="file" class="my-5 text-xl mt-1 block w-full" placeholder="{{ __('IMAGE') }}"  />
 
                 <x-input-error for="editing.publiciteUrl" class="mt-2" />

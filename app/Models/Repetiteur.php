@@ -10,7 +10,7 @@ class Repetiteur extends Model
 {
     use HasFactory,Uuid;
 
-    protected $fillable = [ 'phone', 'commune_id', 'matricule', 'etats','evaluation','traitementDossiers', 'cycle','diplome_imageUrl','profil_imageUrl','status','user_id','ecole','grade','sexe','experience','adresse','description', 'dateLieuNaissance','situationMatrimoniale','niveauEtude','heureDisponibilite','identite','casierJudiciaire','attestationResidence', 'created_at', 'updated_at'];
+    protected $fillable = [ 'phone', 'commune_id', 'matricule', 'etats','evaluation','traitementDossiers', 'cycle','diplome_imageUrl','profil_imageUrl','status','user_id','ecole','grade','sexe','experience','adresse','description', 'dateLieuNaissance','situationMatrimoniale','niveauEtude','heureDisponibilite','identite','casierJudiciaire','attestationResidence', 'notes', 'created_at', 'updated_at'];
 
     public function user()
     {

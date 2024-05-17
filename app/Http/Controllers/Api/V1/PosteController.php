@@ -15,21 +15,48 @@ class PosteController extends ApiController
         /**
      * Display a listing of the resource.
      */
+    // public function index(Request $request)
+    // {
+    //     $query = Poste::query();
+    //     if ($request->has('user_id')) {
+    //         $query->whereHas('demande.enfants.parents', function($query) use ($request) {
+    //             $query->where('user_id', $request->input('user_id'));
+    //         });
+
+    //         $query->whereNotNull('appreciation_repetiteur');
+    //     }
+    //     if ($request->has('user_id')) {
+    //         $query->whereHas('repetiteur', function($query) use ($request) {
+    //             $query->where('user_id', $request->input('user_id'));
+    //         });
+    //     }
+    //     $postes = $query->latest('created_at')->get();;
+    //     return new PosteCollection($postes);
+
+    // }
     public function index(Request $request)
-    {
-        $query = Poste::query();
-        if ($request->has('user_id')) {
+{
+    $query = Poste::query();
+
+    if ($request->has('user_id')) {
+        $query->where(function($query) use ($request) {
             $query->whereHas('demande.enfants.parents', function($query) use ($request) {
                 $query->where('user_id', $request->input('user_id'));
+            })
+            ->orWhereHas('repetiteur', function($query) use ($request) {
+                $query->where('user_id', $request->input('user_id'));
             });
-            
-            $query->whereNotNull('appreciation_repetiteur');
-        }
-
-        $postes = $query->latest('created_at')->get();;
-        return new PosteCollection($postes);
-
+        })
+        ->whereNotNull('appreciation_repetiteur');
+    } else {
+        // Si aucun user_id n'est fourni, retourner tous les postes sans filtre supplémentaire
+        $query->latest('created_at');
     }
+
+    $postes = $query->get();
+    return new PosteCollection($postes);
+}
+
 
     /**
      * Store a newly created resource in storage.

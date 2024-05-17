@@ -5,11 +5,11 @@ namespace App\Http\Livewire;
 use App\Models\Commune;
 use Livewire\Component;
 use Illuminate\Support\Facades\Session;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 class ShowCommune extends Component
 {
 
-
+    use LivewireAlert;
 
     public Commune $deleting;
     public Commune $editing;
@@ -52,15 +52,24 @@ class ShowCommune extends Component
         $this->deleting->delete();
 
         $this->showDeleteModal = false;
-
-        $this->notify('Vous avez supprimé une Commune');
+        $this->alert('success', 'Vous avez supprimé une commune', [
+            'position' => 'top-end',
+            'timer' => 5000,
+            'toast' => true,
+           ]);
+       // $this->notify('Vous avez supprimé une Commune');
     }
 
     public function save()
     {
         $this->validate();
         $this->editing->save();
-        $this->notify('Enregistrement effectué avec succès');
+        //$this->notify('Enregistrement effectué avec succès');
+        $this->alert('success', 'Enregistrement effectué avec succès', [
+            'position' => 'top-end',
+            'timer' => 5000,
+            'toast' => true,
+           ]);
         $this->showEditModal = false;
     }
     public function notify($message)

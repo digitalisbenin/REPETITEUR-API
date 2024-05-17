@@ -11,7 +11,7 @@
     <div class="flex items-center justify-between pb-4">
        
         <div class="">
-            <label for="table-search" class="block mb-2 text-3xl font-medium text-gray-900 dark:text-white"> Liste des classes</label>
+            <label for="table-search" class="block mb-2 text-3xl uppercase  font-medium text-gray-900 dark:text-white"> Liste des classes</label>
 
         </div>
         <div>
@@ -25,8 +25,8 @@
         </div>
     </div>
 
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <table class="w-full text-sm text-left text-gray-500 ">
+        <thead class="text-lg text-gray-700 uppercase bg-gray-50 ">
             <tr>
                 <th scope="col" class="px-6 py-3">
                     Nom
@@ -40,16 +40,16 @@
             @foreach ($classe as $matieres)
 
                 <tr
-                    class="bg-white text-lg border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    class="bg-white text-lg border-b  hover:bg-gray-50 ">
 
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                         {{ $matieres->name }}
                     </th>
                     <td class="flex items-center px-6 py-4 space-x-3">
                         <a href="#" wire:click="edit({{ $matieres }})" wire:loading.attr="disabled"
-                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Modifier</a>
+                            class="font-medium text-blue-600  hover:underline">Modifier</a>
                         <a href="#" wire:click="delete({{ $matieres }})" wire:loading.attr="disabled"
-                            class="font-medium text-red-600 dark:text-red-500 hover:underline">Supprimer</a>
+                            class="font-medium text-red-600  hover:underline">Supprimer</a>
                     </td>
                 </tr>
             @endforeach
@@ -64,7 +64,7 @@
 
         <x-slot name="content">
             <div class="p-6 text-center">
-                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
+                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 " aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -91,7 +91,7 @@
 
         <x-slot name="content">
             <div class="mt-4">
-                <label for="editing.name" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">NOM DE LA CLASSE</label>
+                <label for="editing.name" class="block mb-2 text-xl font-medium text-gray-900 ">NOM DE LA CLASSE</label>
                 <x-input type="text" class="mt-1 block w-full text-xl" placeholder="{{ __('NOM') }}" x-ref="editing.name"
                     wire:model.defer="editing.name"  />
 

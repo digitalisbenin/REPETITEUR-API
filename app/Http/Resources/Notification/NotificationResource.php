@@ -33,7 +33,7 @@ class NotificationResource extends JsonResource
 return [
             'id' => $this->id,
             'type' =>$this->type,
-            'message'=>$this->message,
+           // 'message'=>$this->message,
             'status'=>$this->status,
             // 'demande'=>new DemandeResource($this->demande),
              //'payement'=>new PayementResource($this->payement),

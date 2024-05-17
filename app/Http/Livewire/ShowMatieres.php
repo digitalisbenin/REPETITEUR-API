@@ -4,9 +4,11 @@ namespace App\Http\Livewire;
 use App\Models\Matiere;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 class ShowMatieres extends Component
 {
+
+    use LivewireAlert;
     public Matiere $deleting;
     public Matiere $editing;
     public $showDeleteModal = false;
@@ -48,7 +50,11 @@ class ShowMatieres extends Component
         $this->deleting->delete();
 
         $this->showDeleteModal = false;
-
+        $this->alert('success', 'Vous avez supprimé une matière', [
+            'position' => 'top-end',
+            'timer' => 5000,
+            'toast' => true,
+           ]);
         $this->notify('Vous avez supprimé une Matiere');
     }
 
@@ -56,7 +62,12 @@ class ShowMatieres extends Component
     {
         $this->validate();
         $this->editing->save();
-        $this->notify('Enregistrement effectué avec succès');
+        $this->alert('success', 'Enregistrement effectué avec succès', [
+            'position' => 'top-end',
+            'timer' => 5000,
+            'toast' => true,
+           ]);
+       // $this->notify('Enregistrement effectué avec succès');
         $this->showEditModal = false;
     }
     public function notify($message)

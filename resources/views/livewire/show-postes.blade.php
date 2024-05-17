@@ -7,76 +7,72 @@
             </div>
         @endif
     </div>
-    <label for="table-search" class="block mb-2 text-3xl font-medium text-gray-900 dark:text-white">Appréciations</label>
-   
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <label for="table-search" class="block mb-2 text-3xl uppercase  font-medium text-gray-900 ">Appréciations du Répétiteur</label>
+
+    <table class="w-full text-sm text-left text-gray-500 ">
+        <thead class="text-lg text-gray-700 uppercase bg-gray-50">
             <tr>
+
                 <th scope="col" class="px-6 py-3">
-                    APPRECIATION sur Répétiteur
+                    REPETITEUR
                 </th>
-                <th scope="col" class="px-6 py-3">
-                    APPRECIATION sur un enfant
-                </th>
-                <th scope="col" class="px-6 py-3">
+                {{--  <th scope="col" class="px-6 py-3">
                     PRESENCE AU POSTE
-                </th>
+                </th>  --}}
                 {{--  <th scope="col" class="px-6 py-3">
                     Nom de l'enfant
                 </th>  --}}
                 <th scope="col" class="px-6 py-3">
-                    PARENTS
+                    APPRECIE
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    REPETITEUR
+                    Enfants
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Réponse Parents
                 </th>
-                <th scope="col" class="px-6 py-3">
+                {{--  <th scope="col" class="px-6 py-3">
                     Réponse Admin
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Action
-                </th>
+                </th>  --}}
             </tr>
         </thead>
         <tbody>
             @foreach ($postes as $poste)
                 <tr
-                    class="text-lg bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    class="text-lg bg-white border-b  hover:bg-gray-50 ">
 
-                    <th scope="row" class="px-6 py-4 ">
-                        {{ $poste->appreciation_parents }}
+
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                     {{ $poste->demande->repetiteur->user->name }}
                     </th>
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      <td class="px-6 py-4">
+                        {{--  {{ \Carbon\Carbon::parse($poste->poste)->format('d-m-Y') }}  --}}
                         {{ $poste->appreciation_repetiteur }}
-                    </th>
-                    <td class="px-6 py-4">
-                        {{ \Carbon\Carbon::parse($poste->poste)->format('d-m-Y') }}
 
                     </td>
                     {{--  <td class="px-6 py-4">
                         {{ $poste->demande->enfants->fname }}   {{ $poste->demande->enfants->lname }}
                    </td>  --}}
                    <td class="px-6 py-4">
-                    {{ $poste->demande->enfants->parents->user->name }}
+                    {{ $poste->demande->enfants->fname }}
+                    {{ $poste->demande->enfants->lname }}
                </td>
-               <td class="px-6 py-4">
+               {{--  <td class="px-6 py-4">
                 {{ $poste->demande->repetiteur->user->name }}
-           </td>
+           </td>  --}}
            <td class="px-6 py-4">
             {{ $poste->reponse_parents }}
        </td>
-       <td class="px-6 py-4">
-        {{ $poste->reponse_admin }}
-   </td>
-   <td class="flex items-center px-6 py-4 space-x-3" >
+
+   {{--  <td class="flex items-center px-6 py-4 space-x-3" >
     @if ($poste->reponse_admin == '' && $poste->appreciation_parents!='')
-        <a href="#" wire:click="edit({{ $poste }})" wire:loading.attr="disabled" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Répondre</a>
-        {{-- Ajoutez ici le code pour le lien de suppression s'il est décommenté --}}
+        <a href="#" wire:click="edit({{ $poste }})" wire:loading.attr="disabled" class="font-medium text-blue-600  hover:underline">Répondre</a>
+
     @endif
-</td>
+</td>  --}}
 
 
 
@@ -99,7 +95,7 @@
 
         <x-slot name="content">
             <div class="p-6 text-center">
-                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
+                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 " aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -128,7 +124,7 @@
             <div class="mt-4 text-xl">
 
                 <label for="editing.appreciation_parents"
-                    class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Apprécitions du parents</label>
+                    class="block mb-2 text-lg font-medium text-gray-900 ">Apprécitions du parents</label>
                     <x-input disabled type="text" readonly class="mt-1 block w-full text-xl" placeholder="{{ __('Appréciations du parents') }}" x-ref="editing.appreciation_parents"
                     wire:model.defer="editing.appreciation_parents" />
 
@@ -137,8 +133,8 @@
             </div>
             <div class="mt-4">
                 <label for="editing.reponse_admin"
-                class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Votre Réponse</label>
-                <textarea id="message" wire:model.defer="editing.reponse_admin" rows="4" class="block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Message" required></textarea>
+                class="block mb-2 text-lg font-medium text-gray-900 ">Votre Réponse</label>
+                <textarea id="message" wire:model.defer="editing.reponse_admin" rows="4" class="block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Message" required></textarea>
                 {{--  <x-input type="text" class="mt-1 block w-full text-xl" placeholder="{{ __('REPONSE ADMIN') }}" x-ref="editing.content"
                     wire:model.defer="editing.reponse_admin" />  --}}
 

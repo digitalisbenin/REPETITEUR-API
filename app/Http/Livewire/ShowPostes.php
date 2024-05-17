@@ -5,13 +5,13 @@ namespace App\Http\Livewire;
 use App\Models\Demande;
 use Livewire\Component;
 use Illuminate\Support\Facades\Session;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Models\Poste;
 use App\Models\Repetiteur;
 use App\Models\User;
 class ShowPostes extends Component
 {
-
+    use LivewireAlert;
         public Poste $deleting;
         public Poste $editing;
         public $showDeleteModal = false;
@@ -67,7 +67,12 @@ class ShowPostes extends Component
         {
             $this->validate();
             $this->editing->save();
-            $this->notify('Enregistrement effectué avec succès');
+            $this->alert('success', 'Enregistrement effectué avec succès', [
+                'position' => 'top-end',
+                'timer' => 5000,
+                'toast' => true,
+               ]);
+           // $this->notify('Enregistrement effectué avec succès');
             $this->showEditModal = false;
         }
 

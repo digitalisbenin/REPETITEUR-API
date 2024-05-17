@@ -3,13 +3,19 @@
 namespace App\Http\Livewire;
 
 use App\Models\Message;
+use App\Models\Notification;
 use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\Session;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+
+
+
+
 class ShowMessage extends Component
 {
 
-
+    use LivewireAlert;
     public Message $deleting;
     public Message $editing;
     public $showDeleteModal = false;
@@ -55,13 +61,31 @@ class ShowMessage extends Component
         $this->showDeleteModal = false;
 
         $this->notify('Vous avez supprimé un Message');
+        $this->alert('success', 'Vous avez supprimé un message', [
+            'position' => 'top-end',
+            'timer' => 5000,
+            'toast' => true,
+           ]);
     }
 
     public function save()
     {
         $this->validate();
+       // dd($this->editing->user_id);
+
         $this->editing->save();
-        $this->notify('Enregistrement effectué avec succès');
+        Notification::create([
+            'message_id' => $this->editing->id,
+            'message' => "Réponse Admin",
+            'type' => "reponse",
+            'user_id' => $this->editing->user_id,
+        ]);
+        $this->alert('success', 'Enregistrement effectué avec succès', [
+            'position' => 'top-end',
+            'timer' => 5000,
+            'toast' => true,
+           ]);
+        //$this->notify('Enregistrement effectué avec succès');
         $this->showEditModal = false;
     }
     public function notify($message)
@@ -74,7 +98,7 @@ class ShowMessage extends Component
 
         return view('livewire.show-message',[
             'message'=> Message::all(),
-            
+
 
         ]);
     }

@@ -10,9 +10,10 @@ use Illuminate\Support\Facades\Session;
 // use Livewire\WithFileUploads;
 // use Illuminate\Support\Facades\Storage;
 // use Illuminate\Http\UploadedFile;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 class ShowRepetiteurs extends Component
 {
+    use LivewireAlert;
     // use WithFileUploads;
     public Repetiteur $deleting;
     public Repetiteur $editing;
@@ -70,6 +71,7 @@ class ShowRepetiteurs extends Component
             // 'editing.diplome_imageUrl' => 'required',
             // 'editing.profil_imageUrl' => 'required|min:1',
            // 'editing.grade' => 'required|min:1',
+            'editing.notes' => 'required|min:1',
             'editing.ecole' => 'required|min:1',
             'editing.description' => 'required|min:1',
             // 'editing.dateLieuNaissance' => 'required|min:1',

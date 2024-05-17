@@ -10,12 +10,12 @@
     <div class="flex items-center justify-between pb-4">
 
         <div class="">
-            <label for="table-search" class="block mb-2 text-3xl font-medium text-gray-900 dark:text-white">Liste des tarifications</label>
+            <label for="table-search" class="block mb-2 text-3xl font-medium text-gray-900 uppercase">Liste des tarifications</label>
 
         </div>
         <div>
             <button wire:click="create" type="button"
-                class="inline-flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"><svg
+                class="inline-flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 "><svg
                     class="w-[14px] h-[14px] text-white dark:text-white mt-1 mr-2" aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
@@ -43,9 +43,9 @@
         <tbody>
             @foreach ($tarification as $poste)
                 <tr
-                    class="bg-white text-lg border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    class="bg-white text-lg border-b  hover:bg-gray-50 ">
 
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                         {{ $poste->matiere->name }}
                     </th>
                     <td class="px-6 py-4">
@@ -57,9 +57,9 @@
 
                     <td class="flex items-center px-6 py-4 space-x-3">
                         <a href="#" wire:click="edit({{ $poste }})" wire:loading.attr="disabled"
-                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Modifier</a>
+                            class="font-medium text-blue-600  hover:underline">Modifier</a>
                         <a href="#" wire:click="delete({{ $poste }})" wire:loading.attr="disabled"
-                            class="font-medium text-red-600 dark:text-red-500 hover:underline">Supprimer</a>
+                            class="font-medium text-red-600  hover:underline">Supprimer</a>
                     </td>
                 </tr>
             @endforeach
@@ -74,7 +74,7 @@
 
         <x-slot name="content">
             <div class="p-6 text-center">
-                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
+                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 " aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -104,9 +104,9 @@
             <div class="mt-4">
 
                 <label for="editing.matiere_id"
-                    class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">MATIERE</label>
+                    class="block mb-2 text-xl font-medium text-gray-900 ">MATIERE</label>
                 <select id="editing.enfant_id" wire:model.defer="editing.matiere_id"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                     <option selected>Selectionnez une matiere</option>
                     @foreach($matiere as $enfant)
                     <option value="{{ $enfant->id }}">{{ $enfant->name }}</option>
@@ -119,9 +119,9 @@
             <div class="mt-4">
 
                 <label for="editing.classe_id"
-                    class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">CLASSE</label>
+                    class="block mb-2 text-xl font-medium text-gray-900 ">CLASSE</label>
                 <select id="editing.classe_id" wire:model.defer="editing.classe_id"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                     <option selected>Selectionnez une classe</option>
                     @foreach($classe as $enfants)
                     <option value="{{ $enfants->id }}">{{ $enfants->name }}</option>
@@ -134,7 +134,7 @@
 
             <div class="mt-4">
                 <label for="editing.prix"
-                class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">ENTRER LE PRIX</label>
+                class="block mb-2 text-xl font-medium text-gray-900 ">ENTRER LE PRIX</label>
                 <x-input type="number" class="mt-1 block w-full  text-xl" placeholder="{{ __('PRIX') }}" x-ref="editing.prix"
                     wire:model.defer="editing.prix" />
 

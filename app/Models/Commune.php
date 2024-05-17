@@ -11,7 +11,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Commune extends Model
 {
     use HasFactory, Uuid;
+    
     protected $fillable = ['name','created_at', 'updated_at'];
+
     public function commune()
     {
         return $this->belongsTo(Repetiteur::class);

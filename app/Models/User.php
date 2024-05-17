@@ -59,7 +59,7 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    
+
      public function role()
     {
         return $this->belongsTo(Role::class);
@@ -76,5 +76,10 @@ class User extends Authenticatable
     public function notifications()
     {
         return $this->hasMany(Notification::class);
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
     }
 }

@@ -27,6 +27,7 @@ class StorePosteRequest extends FormRequest
         return [
             
             'demande_id' => 'required',
+            'repetiteur_id' => 'required',
         ];
     }
     public function failedValidation(Validator $validator)

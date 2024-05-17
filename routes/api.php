@@ -23,9 +23,11 @@ use App\Http\Controllers\Api\V1\EvaluationsController;
 use App\Http\Controllers\Api\V1\LibrairieController;
 use App\Http\Controllers\Api\V1\MessageController;
 use App\Http\Controllers\Api\V1\NotificationController;
+use App\Http\Controllers\Api\V1\PresenceauposteController;
 use App\Http\Controllers\Api\V1\PubliciteController;
 use App\Http\Controllers\Api\V1\TarificationController;
 use App\Http\Controllers\Api\V1\RepetiteurMatiereClasseController;
+use App\Http\Controllers\Api\V1\AppreciationsController;
 use App\Models\Role;
 
 /*
@@ -97,6 +99,13 @@ Route::post('/tarifications', [TarificationController::class, 'store']);
 Route::put('/tarifications/{id}', [TarificationController::class, 'update']);
 Route::delete('/tarifications/{id}',[TarificationController::class, 'destroy']);
 
+//routes pour Presenceauposte
+Route::get('/presenceaupostes' ,[PresenceauposteController::class, 'index']);
+Route::get('/presenceaupostes/{id}', [PresenceauposteController::class, 'show']);
+// Route::post('/presenceauposte', [PresenceauposteController::class, 'store']);
+// Route::put('/presenceauposte/{id}', [PresenceauposteController::class, 'update']);
+// Route::delete('/presenceauposte/{id}',[PresenceauposteController::class, 'destroy']);
+
 
 
 //routes pour Publicités
@@ -158,6 +167,14 @@ Route::delete('/evaluations/{id}', [EvaluationsController::class, 'destroy']);
 // route pour les Notifications
 Route::get('/notifications', [NotificationController::class, 'index']);
 Route::get('/notifications/{id}', [NotificationController::class, 'show']);
+
+
+// route pour les Appréciations
+Route::get('/appreciations', [AppreciationsController::class, 'index']);
+Route::get('/appreciations/{id}', [AppreciationsController::class, 'show']);
+Route::post('/appreciations', [AppreciationsController::class, 'store']);
+Route::put('/appreciations/{id}', [AppreciationsController::class, 'update']);
+Route::delete('/appreciations/{id}', [AppreciationsController::class, 'destroy']);
 
 
 // route pour les Communes
@@ -244,4 +261,18 @@ Route::delete('/postes/{id}', [PosteController::class, 'destroy']);
 Route::post('/notifications', [NotificationController::class, 'store']);
 Route::put('/notifications/{id}', [NotificationController::class, 'update']);
 Route::delete('/notifications/{id}', [NotificationController::class, 'destroy']);
+
+
+//Presence au poste
+Route::post('/presenceaupostes', [PresenceauposteController::class, 'store']);
+Route::put('/presenceaupostes/{id}', [PresenceauposteController::class, 'update']);
+Route::delete('/presenceaupostes/{id}',[PresenceauposteController::class, 'destroy']);
+
+
+//Appreciations
+Route::post('/appreciations', [AppreciationsController::class, 'store']);
+Route::put('/appreciations/{id}', [AppreciationsController::class, 'update']);
+Route::delete('/appreciations/{id}', [AppreciationsController::class, 'destroy']);
+
+
 });

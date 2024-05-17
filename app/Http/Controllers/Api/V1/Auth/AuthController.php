@@ -153,7 +153,11 @@ class AuthController extends ApiController
     public function logout()
     {
         auth()->user()->currentAccessToken()->delete();
-        return response(null, 204);
+       
+        return response()->json([
+            'success' => true,
+            'message' => "Déconnexion réussie avec succès"
+        ], 204);
     }
 
 

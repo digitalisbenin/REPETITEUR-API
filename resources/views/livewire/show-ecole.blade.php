@@ -9,19 +9,19 @@
     <div class="flex items-center justify-between pb-4">
        
         <div class="">
-            <label for="table-search" class="block mb-2 text-3xl font-medium text-gray-900 dark:text-white"> Liste des écoles partenaires</label>
+            <label for="table-search" class="block mb-2 text-3xl uppercase  font-medium text-gray-900 "> Liste des écoles partenaires</label>
 
 
         </div>
         <div>
-            <button wire:click="create" type="button" class="inline-flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"><svg class="w-[14px] h-[14px] text-white dark:text-white mt-1 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+            <button wire:click="create" type="button" class="inline-flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2  "><svg class="w-[14px] h-[14px] text-white  mt-1 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 1v16M1 9h16" />
                 </svg>Ajouter</button>
         </div>
     </div>
 
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <table class="w-full text-sm text-left text-gray-500 ">
+        <thead class="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 ">
             <tr>
                 <th scope="col" class="px-6 py-3">
                     Nom
@@ -43,9 +43,9 @@
         </thead>
         <tbody>
             @foreach ($ecole as $epreuve)
-            <tr class="text-lg bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <tr class="text-lg bg-white border-b hover:bg-gray-50 ">
 
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                     {{ $epreuve->name }}
                 </th>
                 <td class="px-6 py-4">
@@ -68,8 +68,8 @@
 
 
                 <td class="flex items-center px-6 py-4 space-x-3">
-                    <a href="#" wire:click="edit({{ $epreuve }})" wire:loading.attr="disabled" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Modifier</a>
-                    <a href="#" wire:click="delete({{ $epreuve }})" wire:loading.attr="disabled" class="font-medium text-red-600 dark:text-red-500 hover:underline">Supprimer</a>
+                    <a href="#" wire:click="edit({{ $epreuve }})" wire:loading.attr="disabled" class="font-medium text-blue-600  hover:underline">Modifier</a>
+                    <a href="#" wire:click="delete({{ $epreuve }})" wire:loading.attr="disabled" class="font-medium text-red-600  hover:underline">Supprimer</a>
                 </td>
             </tr>
             @endforeach
@@ -85,7 +85,7 @@
 
         <x-slot name="content">
             <div class="p-6 text-center">
-                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
                 {{ __('Êtes-vous sûr que vous souhaitez supprimer? Cette action est irréversible.') }}
@@ -110,26 +110,26 @@
 
         <x-slot name="content">
             <div class="mt-4">
-                <label for="editing.publiciteUrl" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">NOM DE L'ECOLE</label>
+                <label for="editing.publiciteUrl" class="block mb-2 text-xl font-medium text-gray-900">NOM DE L'ECOLE</label>
                 <x-input type="text" class="mt-1 block w-full text-xl" placeholder="{{ __('NOM') }}" x-ref="editing.name" wire:model.defer="editing.name" />
 
                 <x-input-error for="editing.name" class="mt-2" />
             </div>
             <div class="mt-4">
-                <label for="editing.publiciteUrl" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">ENTRER UNE IMAGE</label>
+                <label for="editing.publiciteUrl" class="block mb-2 text-xl font-medium text-gray-900">ENTRER UNE IMAGE</label>
                 <x-input type="file" wire:model="file" id="file" class="mt-1 block w-full text-xl" placeholder="{{ __('IMAGE') }}"  />
 
                 <x-input-error for="editing.publiciteUrl" class="mt-2" />
             </div>
             <div class="mt-4">
-                <label for="editing.description" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">DESCRIPTION</label>
-                <textarea id="message" wire:model.defer="editing.description" rows="4" x-ref="editing.description" class="block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Message" required></textarea>
+                <label for="editing.description" class="block mb-2 text-xl font-medium text-gray-900">DESCRIPTION</label>
+                <textarea id="message" wire:model.defer="editing.description" rows="4" x-ref="editing.description" class="block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  placeholder="Message" required></textarea>
 
 
                 <x-input-error for="editing.description" class="mt-2" />
             </div>
             <div class="mt-4">
-                <label for="editing.resultat" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">RESULTAT</label>
+                <label for="editing.resultat" class="block mb-2 text-xl font-medium text-gray-900 ">RESULTAT</label>
                 <x-input type="text" class="mt-1 block w-full text-xl" placeholder="{{ __('RESULTAT') }}" x-ref="editing.resultat" wire:model.defer="editing.resultat" />
 
                 <x-input-error for="editing.resultat" class="mt-2" />

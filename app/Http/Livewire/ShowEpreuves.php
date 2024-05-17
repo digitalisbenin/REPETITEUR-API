@@ -9,11 +9,11 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Support\Facades\Session;
 class ShowEpreuves extends Component
 {
-
+    use LivewireAlert;
     use WithFileUploads;
     public Epreuve $deleting;
     public Epreuve $editing;
@@ -91,13 +91,18 @@ class ShowEpreuves extends Component
 
         $this->showDeleteModal = false;
 
-        $this->notify('Vous avez supprimé une Epreuve');
+        //$this->notify('Vous avez supprimé une Epreuve');
+        $this->alert('success', 'Vous avez supprimé une epreuve', [
+            'position' => 'top-end',
+            'timer' => 5000,
+            'toast' => true,
+           ]);
     }
 
     public function corriges(){
 
         $this->validate([
-            'pdffile' => 'required|max:10240',
+            'pdffile' => 'nullable',
         ]);
 
 
@@ -139,7 +144,7 @@ class ShowEpreuves extends Component
         // $this->showEditModal = false;
         $this->validate([
             'file' => 'required|max:10240',
-
+            'pdffile' => 'nullable',
             'editing.type' => 'required|min:2',
             // 'editing.epreuve' => 'required|min:2',
              'editing.classe_id' => 'required|min:1',
@@ -173,7 +178,39 @@ class ShowEpreuves extends Component
         }
         $url = $this->file->storePubliclyAs($path, $name, 's3');
         $url = "https://apibackout.s3.amazonaws.com/$url";
-        $this->corriges();
+
+
+        if ($this->pdffile) {
+
+
+        $file = $this->pdffile;
+
+        $name = time() . $file->getClientOriginalName();
+        $fileType = $this->getFileType($file);
+        //dd($fileType);
+        $path = '';
+        switch ($fileType) {
+            case 'image':
+                $path = 'images';
+                break;
+            case 'audio':
+                $path = 'audios';
+                break;
+            case 'video':
+                $path = 'videos';
+                break;
+            case 'pdf':
+                $path = 'pdfs';
+                break;
+            default:
+                $path = 'images';
+                break;
+        }
+        $url = $this->file->storePubliclyAs($path, $name, 's3');
+        $url = "https://apibackout.s3.amazonaws.com/$url";
+       $this->corrigesURL=$url;
+        }
+
 
          //dd( $this->diplomeUrl);
        //  dd($this->editing->id);
@@ -192,21 +229,31 @@ class ShowEpreuves extends Component
 
                 $epreuve->save();
 
-                $this->notify('Modification effectuée avec succès');
+                //$this->notify('Modification effectuée avec succès');
+                $this->alert('success', 'Modification effectué avec succès', [
+                    'position' => 'top-end',
+                    'timer' => 5000,
+                    'toast' => true,
+                   ]);
                 $this->showEditModal = false;
             }
 
 
          } else {
             Epreuve::create([
-                
+
                 'classe_id' => $this->editing->classe_id,
                 'matiere_id' => $this->editing->matiere_id,
                 'type' => $this->editing->type,
                 'epreuve' => $url,
                 'corrige' =>$this->corrigesURL,
             ]);
-            $this->notify('Enregistrement effectué avec succès');
+            //$this->notify('Enregistrement effectué avec succès');
+            $this->alert('success', 'Enregistrement effectué avec succès', [
+                'position' => 'top-end',
+                'timer' => 5000,
+                'toast' => true,
+               ]);
             $this->showEditModal = false;
         }
 

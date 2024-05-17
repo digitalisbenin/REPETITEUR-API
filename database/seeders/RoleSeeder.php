@@ -19,15 +19,6 @@ class RoleSeeder extends Seeder
         if (!count(Role::all())) {
 
             Role::create(
-                [
-                    'name' => 'Super Admin',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ],
-
-            );
-
-            Role::create(
 
                 [
                     'name' => 'Repetiteur',
@@ -37,6 +28,10 @@ class RoleSeeder extends Seeder
 
             );
 
+
+
+
+
             Role::create(
 
                 [
@@ -44,6 +39,15 @@ class RoleSeeder extends Seeder
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]
+            );
+
+            Role::create(
+                [
+                    'name' => 'Super Admin',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+
             );
         }
     }

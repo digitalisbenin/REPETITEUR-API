@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('repetiteurs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('user_id');
+            $table->uuid('user_id')->unique();
             $table->uuid('commune_id');
             $table->string('matricule')->unique();
             $table->string('cycle');
-            $table->string('diplome_imageUrl');
-            $table->string('profil_imageUrl');
+            $table->string('diplome_imageUrl')->nullable();
+            $table->string('profil_imageUrl')->nullable();
             $table->string('phone');
             $table->string('adresse');
             $table->string('description');
@@ -28,9 +28,9 @@ return new class extends Migration
             $table->string('situationMatrimoniale');
             $table->string('niveauEtude');
             $table->string('heureDisponibilite');
-            $table->string('identite');
-            $table->string('casierJudiciaire');
-            $table->string('attestationResidence');
+            $table->string('identite')->nullable();
+            $table->string('casierJudiciaire')->nullable();
+            $table->string('attestationResidence')->nullable();
             $table->string('sexe');
             $table->string('grade');
 

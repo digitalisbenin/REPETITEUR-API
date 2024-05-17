@@ -17,54 +17,54 @@ class RepetiteurController extends ApiController
 {
 
 
-    public function getFileType(UploadedFile $file): string
-    {
-        if ($file && $file->isValid()) {
-            $mime = $file->getMimeType();
-            return $this->mimeToType($mime);
-        }
+    // public function getFileType(UploadedFile $file): string
+    // {
+    //     if ($file && $file->isValid()) {
+    //         $mime = $file->getMimeType();
+    //         return $this->mimeToType($mime);
+    //     }
 
-        return '';
-    }
+    //     return '';
+    // }
 
-    public function mimeToType(string $mime = null): string
-    {
-        if ($mime) {
-            if (strstr($mime, 'image/')) {
-                return 'image';
-            } elseif (strstr($mime, 'video/')) {
-                return 'video';
-            } elseif (strstr($mime, 'audio/')) {
-                return 'audio';
-            } elseif ($mime == 'application/pdf') {
-                return 'pdf';
-            }
-        }
+    // public function mimeToType(string $mime = null): string
+    // {
+    //     if ($mime) {
+    //         if (strstr($mime, 'image/')) {
+    //             return 'image';
+    //         } elseif (strstr($mime, 'video/')) {
+    //             return 'video';
+    //         } elseif (strstr($mime, 'audio/')) {
+    //             return 'audio';
+    //         } elseif ($mime == 'application/pdf') {
+    //             return 'pdf';
+    //         }
+    //     }
 
-        return 'file';
-    }
-    public function setFilePath(string $fileType, string $name): string
-    {
-            $path = '';
-            switch ($fileType) {
-                case 'image':
-                    $path = 'images/' . $name;
-                    break;
-                case 'audio':
-                    $path = 'audios/' . $name;
-                    break;
-                case 'video':
-                    $path = 'videos/' . $name;
-                    break;
-                case 'pdf':
-                    $path = 'pdfs/' . $name;
-                    break;
-                default:
-                    $path = 'images/' . $name;
-                    break;
-            }
-            return $path;
-        }
+    //     return 'file';
+    // }
+    // public function setFilePath(string $fileType, string $name): string
+    // {
+    //         $path = '';
+    //         switch ($fileType) {
+    //             case 'image':
+    //                 $path = 'images/' . $name;
+    //                 break;
+    //             case 'audio':
+    //                 $path = 'audios/' . $name;
+    //                 break;
+    //             case 'video':
+    //                 $path = 'videos/' . $name;
+    //                 break;
+    //             case 'pdf':
+    //                 $path = 'pdfs/' . $name;
+    //                 break;
+    //             default:
+    //                 $path = 'images/' . $name;
+    //                 break;
+    //         }
+    //         return $path;
+    //     }
            /**
      * Display a listing of the resource.
      */
@@ -74,6 +74,17 @@ class RepetiteurController extends ApiController
 
         if ($request->has('user_id')) {
             $query->where('user_id', $request->input('user_id'));
+        }
+        if ($request->has('traitementDossiers')) {
+            $query->where('traitementDossiers', $request->input('traitementDossiers'));
+        }
+        if ($request->has('evaluation')) {
+            $query->where('evaluation', $request->input('evaluation'));
+        }
+        if ($request->has('name')) {
+            $query->whereHas('commune', function($query) use ($request) {
+                $query->where('name', $request->input('name'));
+            });
         }
 
         $repetiteurs = $query->latest('created_at')->get();

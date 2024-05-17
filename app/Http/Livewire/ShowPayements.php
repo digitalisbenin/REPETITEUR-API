@@ -9,10 +9,11 @@ use App\Models\Demande;
 use App\Models\Enfants;
 use App\Models\Notification;
 use App\Models\User;
-
+use Carbon\Carbon;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 class ShowPayements extends Component
 {
-
+    use LivewireAlert;
     public Payement $deleting;
     public Payement $editing;
     public $showDeleteModal = false;
@@ -23,7 +24,14 @@ class ShowPayements extends Component
     public $statusFilterPaye = false;
     public $startDate;
     public $endDate;
-
+    public $anneeEnCours;
+    public $existingEntry;
+    public $errorMessage;
+    public $errorMessages;
+    public $dateActuelle;
+    public $dateEcheance;
+    public $showErrorMessage = false;
+    public $delay = 3000;
     public function rules()
     {
         return [
@@ -33,7 +41,7 @@ class ShowPayements extends Component
            // 'editing.reference' => 'required|min:1',
            // 'editing.phone' => 'required|min:1',
             'editing.date' => 'required|min:1',
-            'editing.annee' => 'required|min:1',
+            //'editing.annee' => 'required|min:1',
             // 'editing.demande_id' => 'required',
             // 'editing.status' => 'required',
         ];
@@ -57,7 +65,7 @@ class ShowPayements extends Component
     {
 
         $this->editing = new Payement();
-        $this->action = 'Ajouter un Paiement';
+        $this->action = 'Initialiser un Paiement';
         $this->showEditModal = true;
     }
     public function deleteSelected()
@@ -69,55 +77,154 @@ class ShowPayements extends Component
         $this->notify('Vous avez supprimé un paiement');
     }
 
+
+
     public function save()
     {
 
         $this->validate();
-        $demandeIds = Demande::where('status', 'Validé')->pluck('id');
-        $nouveauxPayementsIds = [];
-        $parentIds = Demande::whereIn('id', $demandeIds)
-            ->with('enfants.parents.user')
-            ->get()
-            ->pluck('enfants.parents.user.id');
+        $existingEntry = Payement::where('mois',$this->editing->mois )->where('annee',$this->anneeEnCours = date('Y'))->first();
+        // dd($existingEntry);
+        $dateActuelle = Carbon::now();
+        $dateEcheance = Carbon::createFromFormat('Y-m-d', $this->editing->date);
 
+             if($existingEntry) {
+                //  $this->notify('Vous avez déjà ajouté ce mois et cette année');
+               // $this->errorMessage = 'Vous avez déjà ajouté ce mois et cette année.';
+                //$this->afficherMessageErreur($this->errorMessage);
 
+                $this->alert('error', 'Vous avez déjà ajouté ce mois et cette année.', [
+                    'position' => 'top-end',
+                    'timer' => 5000,
+                    'toast' => true,
+                   ]);
+                $this->showEditModal = false;
 
-
-         foreach ($demandeIds as $demandeId) {
-
-            $nouveauPayement=  Payement::create([
-                  'demande_id' => $demandeId,
-                 'mois' => $this->editing->mois,
-                'annee' => $this->editing->annee,
-                 'date' => $this->editing->date,
-              ]);
-            $nouveauxPayementsIds[] = $nouveauPayement->id;
+             }else if($dateEcheance->lte($dateActuelle)){
+                //$this->errorMessage = "La date de l'écheance doit être supérieur à la date d'initiation ";
+               // $this->afficherMessageErreur($this->errorMessage);
+               $this->alert('error', "Veuillez revoir la date d'échéance", [
+                'position' => 'top-end',
+                'timer' => 5000,
+                'toast' => true,
+               ]);
+                $this->showEditModal = false;
              }
+
+
+             else {
+                $demandeIds = Demande::where('status', 'Validé')->pluck('id');
+                $nouveauxPayementsIds = [];
+                $parentIds = Demande::whereIn('id', $demandeIds)
+                    ->with('enfants.parents.user')
+                    ->get()
+                    ->pluck('enfants.parents.user.id');
+
+
+
+
+                 foreach ($demandeIds as $demandeId) {
+
+                    $nouveauPayement=  Payement::create([
+                          'demande_id' => $demandeId,
+                         'mois' => $this->editing->mois,
+                        'annee' => $this->anneeEnCours = date('Y'),
+                         'date' => $this->editing->date,
+                      ]);
+                    $nouveauxPayementsIds[] = $nouveauPayement->id;
+                     }
+                     //dd($nouveauxPayementsIds);
+         //$demandeIdsArray = $demandeIds->toArray();
+
+                    $parentIdsArray = $parentIds->toArray();
+
+
+        if (count($nouveauxPayementsIds) === count($parentIdsArray)) {
+
+            $pairs = array_combine($nouveauxPayementsIds, $parentIdsArray);
+
+            foreach ($pairs as $nouveauxPayementsId => $parentId) {
+
+                if ($parentId) {
+                    Notification::create([
+                        'payement_id' => $nouveauxPayementsId,
+                        'message' => "Nouveau paiement",
+                        'type' => "paiement",
+                        'user_id' => $parentId,
+                    ]);
+                }
+            }
+        } else {
+            // Les tableaux n'ont pas la même longueur, gérer cette situation selon vos besoins
+            // ...
+        }
+
+
+
+               //  }
+
+        //dd($parentIds);
+
+
+
+
+               // dd($demandeIds);
+                // $this->editing->save();
+                $this->alert('success', 'Enregistrement effectué avec succès', [
+                    'position' => 'top-end',
+                    'timer' => 5000,
+                    'toast' => true,
+                   ]);
+                 //$this->notify('Enregistrement effectué avec succès');
+                 $this->showEditModal = false;
+
+             }
+
+        // $demandeIds = Demande::where('status', 'Validé')->pluck('id');
+        // $nouveauxPayementsIds = [];
+        // $parentIds = Demande::whereIn('id', $demandeIds)
+        //     ->with('enfants.parents.user')
+        //     ->get()
+        //     ->pluck('enfants.parents.user.id');
+
+
+
+
+        //  foreach ($demandeIds as $demandeId) {
+
+        //     $nouveauPayement=  Payement::create([
+        //           'demande_id' => $demandeId,
+        //          'mois' => $this->editing->mois,
+        //         'annee' => $this->anneeEnCours = date('Y'),
+        //          'date' => $this->editing->date,
+        //       ]);
+        //     $nouveauxPayementsIds[] = $nouveauPayement->id;
+        //      }
              //dd($nouveauxPayementsIds);
  //$demandeIdsArray = $demandeIds->toArray();
 
-$parentIdsArray = $parentIds->toArray();
+//             $parentIdsArray = $parentIds->toArray();
 
 
-if (count($nouveauxPayementsIds) === count($parentIdsArray)) {
+// if (count($nouveauxPayementsIds) === count($parentIdsArray)) {
 
-    $pairs = array_combine($nouveauxPayementsIds, $parentIdsArray);
+//     $pairs = array_combine($nouveauxPayementsIds, $parentIdsArray);
 
-    foreach ($pairs as $nouveauxPayementsId => $parentId) {
+//     foreach ($pairs as $nouveauxPayementsId => $parentId) {
 
-        if ($parentId) {
-            Notification::create([
-                'payement_id' => $nouveauxPayementsId,
-                'message' => "Nouveau paiement",
-                'type' => "paiement",
-                'user_id' => $parentId,
-            ]);
-        }
-    }
-} else {
+//         if ($parentId) {
+//             Notification::create([
+//                 'payement_id' => $nouveauxPayementsId,
+//                 'message' => "Nouveau paiement",
+//                 'type' => "paiement",
+//                 'user_id' => $parentId,
+//             ]);
+//         }
+//     }
+// } else {
     // Les tableaux n'ont pas la même longueur, gérer cette situation selon vos besoins
     // ...
-}
+//}
 
 
 
@@ -130,8 +237,8 @@ if (count($nouveauxPayementsIds) === count($parentIdsArray)) {
 
        // dd($demandeIds);
         // $this->editing->save();
-         $this->notify('Enregistrement effectué avec succès');
-         $this->showEditModal = false;
+        //  $this->notify('Enregistrement effectué avec succès');
+        //  $this->showEditModal = false;
     }
     public function notify($message)
     {
@@ -161,6 +268,18 @@ public function toggleStatusFilter($status)
     //         'demande'=> Demande::all(),
     //     ]);
     // }
+
+    public function afficherMessageErreur($messages)
+    {
+       // dd($messages);
+       // $this->errorMessages = $this->errorMessage;
+        $this->errorMessages = $messages;
+        $this->showErrorMessage = true; // Afficher le message d'erreur
+
+        // Masquer le message d'erreur après 5 secondes
+        $this->dispatchBrowserEvent('masquerMessageErreur', ['delay' => 3000]);
+    }
+
     public function render()
 {
     $query = Payement::latest('created_at');
@@ -188,6 +307,8 @@ public function toggleStatusFilter($status)
         'payements' => $payements,
         'demande' => Demande::all(),
     ]);
+
+
 }
 
 

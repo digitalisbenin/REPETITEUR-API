@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 
 class ShowParents extends Component
 {
+   // use LivewireAlert;
     public Parents $deleting;
     public Parents $editing;
     public $showDeleteModal = false;

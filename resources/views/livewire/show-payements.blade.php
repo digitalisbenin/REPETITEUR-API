@@ -7,39 +7,78 @@
                 </div>
             @endif
         </div>
+        {{--  @if ($errorMessage)
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <strong class="font-bold">Erreur !</strong>
+        <span class="block sm:inline">{{ $errorMessage }}</span>
+    </div>
+@endif  --}}
+{{--  @if ($showErrorMessage)
+    <div x-data x-init="
+        $nextTick(() => {
+            setTimeout(() => {
+                $dispatch('masquerMessageErreur');
+            }, {{ $delay }});
+        })
+    " x-on:masquerMessageErreur.window="showErrorMessage = false"
+    class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <strong class="font-bold">Erreur !</strong>
+        <span class="block sm:inline">{{ $errorMessage }}</span>
+    </div>
+@endif  --}}
+<div>
+    @if ($showErrorMessage)
+        <div x-data x-init="
+            $nextTick(() => {
+                setTimeout(() => {
+                    $dispatch('masquerMessageErreur');
+                }, {{ $delay }});
+            })
+        " x-on:masquerMessageErreur.window="showErrorMessage = false"
+        class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <strong class="font-bold">Erreur !</strong>
+            <span class="block sm:inline">{{ $errorMessages }}</span>
+        </div>
+    @endif
+</div>
+
+
+
+
+
         <div class="flex justify-between pb-4">
 
 
             <div class="">
 
-                <label for="table-search" class="block mb-2 text-3xl font-medium text-gray-900 dark:text-white"> Liste des paiements</label>
+                <label for="table-search" class="block mb-2 text-3xl font-medium uppercase  text-gray-900 "> Liste des paiements</label>
             </div>
             <div>
-                <button wire:click="create" type="button"
-                    class="inline-flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"><svg
-                        class="w-[14px] h-[14px] text-white dark:text-white mt-1 mr-2" aria-hidden="true"
+                {{--  <button wire:click="create" type="button"
+                    class="inline-flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2"><svg
+                        class="w-[14px] h-[14px] text-white  mt-1 mr-2" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
                             d="M9 1v16M1 9h16" />
-                    </svg>Initialiser les paiements </button>
+                    </svg>Initialiser un paiement </button>  --}}
             </div>
 
         </div>
        <div class="flex items-center justify-between mb-4">
         <div class=" ">
             <label for=""
-                        class="block mb-2 text-xl font-medium text-gray-900 dark:text-white text-center">Paiement éffectuée sur une periode:</label>
+                        class="block mb-2 text-xl font-medium text-gray-900  text-center">Paiement éffectuée sur une periode:</label>
             <form wire:submit.prevent="render" method="post" class="flex items-center mx-3">
 
                 <div class="flex items-center" >
                     <label for=""
-                        class="block mb-2 text-xl font-medium text-gray-900 dark:text-white ">De</label>
+                        class="block mb-2 text-xl font-medium text-gray-900  ">De</label>
                     <x-input type="date" class="mt-1 block  text-xl mx-3" placeholder="{{ __('ANNEE') }}"
              wire:model="startDate" />
                 </div>
             <div  class="flex items-center">
                 <label for=""
-                        class="block mb-2 text-xl font-medium text-gray-900 dark:text-white text-center">Au</label>
+                        class="block mb-2 text-xl font-medium text-gray-900  text-center">Au</label>
                 <x-input type="date" class="mt-1 block text-xl mx-3" placeholder="{{ __('ANNEE') }}"
              wire:model="endDate" />
             </div>
@@ -49,22 +88,28 @@
               focus:outline-none dark:focus:ring-blue-800"></button>  --}}
             </form>
         </div>
-        <div>
+        <div class="mt-11">
+
+            <button wire:click="create" type="button"
+                    class="inline-flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2"><svg
+                        class="w-[14px] h-[14px] text-white  mt-1 mr-2" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                            d="M9 1v16M1 9h16" />
+                    </svg>Initialiser un paiement </button>
 
             <button wire:click="toggleStatusFilter('Impayer')" type="button"
                     class=" w-48 text-center text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-blue-300
-                    font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700
-                     focus:outline-none dark:focus:ring-blue-800">Impayer</button>
+                    font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 ">Impayer</button>
 
                     <button wire:click="toggleStatusFilter('Payer')" type="button"
                     class=" w-48 text-center text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-blue-300
-                     font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700
-                      focus:outline-none dark:focus:ring-blue-800">Payer</button>
+                     font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 ">Payer</button>
         </div>
        </div>
 
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <table class="w-full text-sm text-left text-gray-500 ">
+            <thead class="text-lg text-gray-700 uppercase bg-gray-50 ">
                 <tr>
                     <th scope="col" class="px-6 py-3">
                         N°
@@ -101,10 +146,10 @@
             <tbody>
                 @foreach ($payements as $keys => $payement)
                     <tr
-                        class=" text-lg bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        class=" text-lg bg-white border-b  hover:bg-gray-50 ">
 
                         <th scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{ $keys + 1 }}
                         </th>
                         {{--  <td class="px-6 py-4">
@@ -160,7 +205,7 @@
 
             <x-slot name="content">
                 <div class="p-6 text-center">
-                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
+                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 " aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -195,9 +240,9 @@
                 <div class="mt-4">
 
                     <label for="editing.mois"
-                        class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">MOIS</label>
+                        class="block mb-2 text-xl font-medium text-gray-900 ">MOIS</label>
                     <select id="editing.mois" wire:model.defer="editing.mois"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                         <option value="Janvier">Selectionner le mois</option>
                         <option value="Janvier">Janvier</option>
                         <option value="Fevrier">Fevrier</option>
@@ -223,7 +268,7 @@
                 <div class="mt-4">
 
                     <label for="editing.date"
-                        class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">ECHEANCE</label>
+                        class="block mb-2 text-xl font-medium text-gray-900 ">ECHEANCE</label>
                     <x-input type="date" class="mt-1 block w-full text-xl"
                         placeholder="{{ __('EX: 2014-05-09 00:20:51') }}" x-ref="editing.date"
                         wire:model.defer="editing.date" />
@@ -248,14 +293,7 @@
                     </select>
                     <x-input-error for="editing.status" class="mt-2" />
                 </div>  --}}
-                <div class="mt-4">
-                    <label for="editing.annee"
-                        class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">ANNEE</label>
-                    <x-input type="text" class="mt-1 block w-full text-xl" placeholder="{{ __('ANNEE') }}"
-                        x-ref="editing.annee" wire:model.defer="editing.annee" />
 
-                    <x-input-error for="editing.annee" class="mt-2" />
-                </div>
 
                 {{--  <div class="mt-4">
 

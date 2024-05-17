@@ -17,7 +17,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+       
         <!-- Styles -->
         @livewireStyles
     </head>
@@ -47,7 +47,17 @@
         </div>
 
         @stack('modals')
-
+        
         @livewireScripts
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+         <x-livewire-alert::scripts />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            window.addEventListener('toastr:danger', event=>{
+                toastr.danger(event.datail.message);
+            });
+        </script>
     </body>
 </html>

@@ -8,7 +8,7 @@ use App\Models\Matiere;
 use App\Models\Parents;
 use App\Models\Repetiteur;
 use Livewire\Component;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 class ShowEnfants extends Component
 {
 

@@ -8,11 +8,12 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Support\Facades\Session;
 
 class ShowPublicites extends Component
 {
+    use LivewireAlert;
     use WithFileUploads;
     public Publicite $deleting;
     public Publicite $editing;
@@ -89,7 +90,12 @@ class ShowPublicites extends Component
 
         $this->showDeleteModal = false;
 
-        $this->notify('Vous avez supprimé une publicité');
+        //$this->notify('Vous avez supprimé une publicité');
+        $this->alert('success', 'Vous avez supprimé une publicité', [
+            'position' => 'top-end',
+            'timer' => 5000,
+            'toast' => true,
+           ]);
     }
 
     public function save()
@@ -133,7 +139,12 @@ class ShowPublicites extends Component
                 $publicite->titre = $this->editing->titre;
                 $publicite->publiciteUrl = $url;
                 $publicite->save();
-                $this->notify('Modification effectuée avec succès');
+                //$this->notify('Modification effectuée avec succès');
+                $this->alert('success', 'Modification effectuée avec succès', [
+                    'position' => 'top-end',
+                    'timer' => 5000,
+                    'toast' => true,
+                   ]);
                 $this->showEditModal = false;
             }
 
@@ -143,7 +154,12 @@ class ShowPublicites extends Component
                 'titre' => $this->editing->titre,
             'publiciteUrl' => $url,
             ]);
-            $this->notify('Enregistrement effectué avec succès');
+            //$this->notify('Enregistrement effectué avec succès');
+            $this->alert('success', 'Enregistrement effectué avec succès', [
+                'position' => 'top-end',
+                'timer' => 5000,
+                'toast' => true,
+               ]);
             $this->showEditModal = false;
         }
     }

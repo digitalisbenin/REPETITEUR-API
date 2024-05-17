@@ -5,9 +5,11 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Role;
 use Illuminate\Support\Facades\Session;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+
 class ShowRoles extends Component
 {
-
+    use LivewireAlert;
     public Role $deleting;
     public Role $editing;
     public $showDeleteModal = false;

@@ -6,11 +6,11 @@
             </div>
         @endif
     </div>
-    <label for="table-search" class="block mb-2 text-3xl font-medium text-gray-900 dark:text-white">Messagerie</label>
+    <label for="table-search" class="block mb-2 text-3xl uppercase  font-medium text-gray-900 ">Messagerie</label>
 
 
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <table class="w-full text-sm text-left text-gray-500 ">
+        <thead class="text-lg text-gray-700 uppercase bg-gray-50 ">
             <tr>
                 <th scope="col" class="px-6 py-3">
                     Nom Complet
@@ -18,9 +18,7 @@
                 <th scope="col" class="px-6 py-3">
                     Téléphone
                 </th>
-                <th scope="col" class="px-6 py-3">
-                    email
-                </th>
+
                 <th scope="col" class="px-6 py-3">
                     message
                 </th>
@@ -35,9 +33,9 @@
         </thead>
         <tbody>
             @foreach ($message as $epreuve)
-            <tr class="text-lg bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <tr class="text-lg bg-white border-b  hover:bg-gray-50 ">
 
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                     {{ $epreuve->name }}
                 </th>
                 <td class="px-6 py-4">
@@ -45,18 +43,14 @@
               {{ $epreuve->phone }}
 
                 </td>
-                <td class="px-6 py-4">
 
-                    {{ $epreuve->email }}
-
-                      </td>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4  " >
 
                   {{ $epreuve->message }}
 
                       </td>
 
-                      <td class="px-6 py-4">
+                      <td  class="px-6 py-4 " >
 
                         {{ $epreuve->reponse_admin }}
 
@@ -67,13 +61,13 @@
 
 
 
-                <td class=flex items-center px-6 py-4 space-x-3>
+                <td class= px-6 py-4 space-x-3>
                     @if ($epreuve->reponse_admin == '')
-                        <a href="#" wire:click="edit({{ $epreuve }})" wire:loading.attr="disabled" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Répondre</a>
+                        <a href="#" wire:click="edit({{ $epreuve }})" wire:loading.attr="disabled" class="font-medium text-blue-600  hover:underline">Répondre</a>
                     @endif
 
                 </td>
-                 
+
             </tr>
             @endforeach
 
@@ -88,7 +82,7 @@
 
         <x-slot name="content">
             <div class="p-6 text-center">
-                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
                 {{ __('Êtes-vous sûr que vous souhaitez supprimer? Cette action est irréversible.') }}
@@ -114,7 +108,7 @@
         <x-slot name="content">
             <div class="mt-4 text-2xl">
                 <label for="editing.message"
-                class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Message</label>
+                class="block mb-2 text-lg font-medium text-gray-900 ">Message</label>
                 <x-input disabled type="text" readonly class="mt-1 block w-full text-xl" placeholder="{{ __('MESSAGE') }}" x-ref="editing.name" wire:model.defer="editing.message" />
 
                 <x-input-error for="editing.message" class="mt-2" />
@@ -122,8 +116,8 @@
 
             <div class="mt-4">
                 <label for="editing.reponse_admin"
-                class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Votre Réponse</label>
-                <textarea id="message" wire:model.defer="editing.reponse_admin" rows="4" class="block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Message" required></textarea>
+                class="block mb-2 text-lg font-medium text-gray-900 ">Votre Réponse</label>
+                <textarea id="message" wire:model.defer="editing.reponse_admin" rows="4" class="block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Message" required></textarea>
 
 
                 <x-input-error for="editing.reponse_admin" class="mt-2" />

@@ -8,11 +8,12 @@ use App\Models\Repetiteur;
 use App\Models\RepetiteurMatiereClasse;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class ShowRepetiteurMatiereClasses extends Component
 {
 
-
+    use LivewireAlert;
     public RepetiteurMatiereClasse $deleting;
     public RepetiteurMatiereClasse $editing;
     public $showDeleteModal = false;

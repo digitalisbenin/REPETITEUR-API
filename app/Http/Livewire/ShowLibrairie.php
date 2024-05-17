@@ -7,12 +7,12 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Support\Facades\Session;
 
 class ShowLibrairie extends Component
 {
-
+    use LivewireAlert;
     use WithFileUploads;
     public Librairie $deleting;
     public Librairie $editing;
@@ -90,7 +90,12 @@ class ShowLibrairie extends Component
 
         $this->showDeleteModal = false;
 
-        $this->notify('Vous avez supprimé une librairie');
+       // $this->notify('Vous avez supprimé une librairie');
+        $this->alert('success', 'Vous avez supprimé une librairie', [
+            'position' => 'top-end',
+            'timer' => 5000,
+            'toast' => true,
+           ]);
     }
 
     public function save()
@@ -136,7 +141,12 @@ class ShowLibrairie extends Component
                 $librairie->description = $this->editing->descri;
                 $librairie->librairieUrl = $url;
                 $librairie->save();
-                $this->notify('Modification effectuée avec succès');
+               // $this->notify('Modification effectuée avec succès');
+                $this->alert('success', 'Modification effectuée avec succès', [
+                    'position' => 'top-end',
+                    'timer' => 5000,
+                    'toast' => true,
+                   ]);
                 $this->showEditModal = false;
             }
 
@@ -147,7 +157,12 @@ class ShowLibrairie extends Component
                 'description' => $this->editing->descri,
                 'librairieUrl' => $url,
             ]);
-            $this->notify('Enregistrement effectué avec succès');
+            $this->alert('success', 'Enregistrement effectué avec succès', [
+                'position' => 'top-end',
+                'timer' => 5000,
+                'toast' => true,
+               ]);
+           // $this->notify('Enregistrement effectué avec succès');
             $this->showEditModal = false;
         }
     }

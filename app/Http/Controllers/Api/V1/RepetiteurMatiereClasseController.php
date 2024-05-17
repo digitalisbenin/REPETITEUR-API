@@ -79,9 +79,28 @@ class RepetiteurMatiereClasseController extends Controller
      */
     public function store(StoreRepetiteurMatiereClasseRequest  $request)
     {
-        $repetiteurmcs = RepetiteurMatiereClasse::create($request->all());
+        // $repetiteurmcs = RepetiteurMatiereClasse::create($request->all());
 
-        return new RepetiteurMatiereClasseResource($repetiteurmcs);
+        // return new RepetiteurMatiereClasseResource($repetiteurmcs);
+         // Vérifier si la relation existe déjà
+    $existingRelation = RepetiteurMatiereClasse::where([
+        'repetiteur_id' => $request->repetiteur_id,
+        'matiere_id' => $request->matiere_id,
+        'classe_id' => $request->classe_id,
+    ])->exists();
+
+    if ($existingRelation) {
+        return response()->json(['message' => 'Vous avez déjà ajouter cette classe et matière.'], 409);
+    }
+
+    // Créer la nouvelle relation
+    $repetiteurmcs = new RepetiteurMatiereClasse();
+    $repetiteurmcs->repetiteur_id = $request->repetiteur_id;
+    $repetiteurmcs->matiere_id = $request->matiere_id;
+    $repetiteurmcs->classe_id = $request->classe_id;
+    $repetiteurmcs->save();
+
+    return new RepetiteurMatiereClasseResource($repetiteurmcs);
     }
 
     /**

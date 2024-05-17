@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
-    //
+
     public function index(Request $request)
     {
         $query = Notification::query();
@@ -21,10 +21,10 @@ class NotificationController extends Controller
             $query->where('user_id', $request->input('user_id'));
         }
 
-        $notification = $query->latest()->get();
+        $notification = $query->latest('created_at')->get();
 
         return new NotificationCollection($notification);
-       // return new NotificationCollection(Notification::all());
+
     }
 
     /**

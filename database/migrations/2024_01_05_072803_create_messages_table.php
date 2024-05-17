@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->string('objet')->nullable();
-            $table->string('message');
-            $table->string('reponse_admin');
+            $table->longText('message');
+            $table->longText('reponse_admin')->nullable();
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')

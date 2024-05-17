@@ -6,21 +6,21 @@
             </div>
         @endif
     </div>
-    <label for="table-search" class="block mb-2 text-3xl font-medium text-gray-900 dark:text-white">Liste des répétiteurs</label>
+    <label for="table-search" class="block mb-2 text-3xl font-medium text-gray-900 uppercase ">Liste des répétiteurs</label>
 
 
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <table class="w-full text-sm text-left text-gray-500 ">
+        <thead class="text-lg text-gray-700 uppercase bg-gray-50  ">
             <tr>
                 <th scope="col" class="px-6 py-3">
                     Noms et  PRENOMS
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Telephone</th>
+                <th scope="col" class="px-6 py-3">
                     CLASSES
                 </th>
-                <th scope="col" class="px-6 py-3">
-                    Telephones
-                </th>
+
                 <th scope="col" class="px-6 py-3">
                     MATIERES
                 </th>
@@ -28,7 +28,7 @@
                     ADRESSES
                 </th>  --}}
                 <th scope="col" class="px-6 py-3">
-                    TraitementS
+                    Status
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -42,11 +42,14 @@
         </thead>
         <tbody>
             @foreach ($repetiteurs as $repetiteur)
-            <tr class="text-lg bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <tr class="text-lg bg-white border-b  hover:bg-gray-50 ">
 
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                     {{ $repetiteur->user->name }}
                 </th>
+                <td class="px-6 py-4">
+                    {{ $repetiteur->phone }}
+                </td>
                 <td class="px-6 py-4">
                     @foreach($repetiteur->matieresClasses as $matiereClasse)
                         {{ $matiereClasse->classe->name }}
@@ -54,9 +57,7 @@
                  @endforeach
 
                 </td>
-                <td class="px-6 py-4">
-                    {{ $repetiteur->phone }}
-                </td>
+
                 <td class="px-6 py-4">
                     @foreach($repetiteur->matieresClasses as $matiereClasse)
                     {{ $matiereClasse->matiere->name }}
@@ -82,7 +83,13 @@
                     {{--  <embed src="{{ $repetiteur->diplome_imageUrl }}" type="application/pdf" width="90%" height="60px" />  --}}
                 {{--  </td>    --}}
                 <td class="px-6 py-4">
-                    <img src="{{ $repetiteur->profil_imageUrl }}" alt="" width="60px">
+
+                    @if(!empty($repetiteur->profil_imageUrl))
+                        <img src="{{ $repetiteur->profil_imageUrl }}" alt="" width="60px">
+                    @else
+                        <img src="{{ asset('image/vectoriel.jpg') }}" alt="" width="60px">
+                    @endif
+
                 </td>
 
 
@@ -107,14 +114,14 @@
                 {{--  </td>   --}}
 
                 <td class="flex items-center px-6 py-4 space-x-3" >
-                    @if ($repetiteur->traitementDossiers === 'En cours')
+                    {{--  @if ($repetiteur->traitementDossiers === 'En cours')
 
-                    <a href="#" wire:click="edit({{ $repetiteur }})" wire:loading.attr="disabled" class="font-medium text-green-600 dark:text-blue-500 hover:underline">Traitement</a>
-                        {{-- Ajoutez ici le code pour le lien de suppression s'il est décommenté --}}
-                    @endif
+                    <a href="#" wire:click="edit({{ $repetiteur }})" wire:loading.attr="disabled" class="font-medium text-green-600  hover:underline">Traiter</a>
+
+                    @endif  --}}
 
                     {{--  <a href="#" wire:click="edite({{ $repetiteur }})" wire:loading.attr="disabled" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Détails</a>  --}}
-                    <a href="/show-details-repetiteur/{{ $repetiteur->id }}"  wire:loading.attr="disabled" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Détails</a>
+                    <a href="/show-details-repetiteur/{{ $repetiteur->id }}"  wire:loading.attr="disabled" class="font-medium text-blue-600  hover:underline">Détails</a>
 
                 </td>
 
@@ -132,7 +139,7 @@
 
         <x-slot name="content">
             <div class="p-6 text-center">
-                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
                 {{ __('Êtes-vous sûr que vous souhaitez supprimer? Cette action est irréversible.') }}
@@ -263,14 +270,28 @@
             <div class="mt-4">
 
                 <label for="editing.user_id"
-                    class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">Utilisateur</label>
-                <select disabled id="editing.user_id" wire:model.defer="editing.user_id"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    class="block mb-2 text-xl font-medium text-gray-900 ">Utilisateur</label><div class="mt-4">
+
+                        @if(isset($editing['user_id']))
+                            @foreach($users as $user)
+                                @if($user->id == $editing['user_id'])
+                                    <input disabled type="text" value="{{ $user->name }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                                @endif
+                            @endforeach
+                        @endif
+                        {{--  @foreach($users as $user)
+                        @if($user->id == $editing['user_id'])
+                            <input disabled type="text" value="{{ $user->name }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                        @endif
+                    @endforeach  --}}
+
+                {{--  <select disabled id="editing.user_id" wire:model.defer="editing.user_id"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                     <option selected>Selectionnez un utilisateur</option>
                     @foreach($users as $user)
                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                     @endforeach
-                </select>
+                </select>  --}}
 
 
                 <x-input-error for="editing.user_id" class="mt-2" />
@@ -292,9 +313,9 @@
             <div class="mt-4">
 
                 <label for="editing.status"
-                    class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">Status</label>
+                    class="block mb-2 text-xl font-medium text-gray-900 ">Status</label>
                 <select id="editing.status" wire:model.defer="editing.status"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                     <option value="Etudiants">Selectionner le status</option>
                     <option value="Etudiants">Etudiants</option>
                     <option value="Professionnel">Professionnel</option>
@@ -304,31 +325,83 @@
                 <x-input-error for="editing.status" class="mt-2" />
             </div>
 
-            <div class="mt-4">
+            <div class="mt-4 flex space-x-4">
 
+               <div class="flex-1">
                 <label for="editing.traitementDossiers"
-                    class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">Traitement de dossiers</label>
-                <select id="editing.traitementDossiers" wire:model.defer="editing.traitementDossiers"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value="En cours">Selectionner le status</option>
-                    <option value="En cours">En cours</option>
-                    <option value="Validé">Validé</option>
-                    <option value="Non Validé">Non Validé</option>
-                </select>
-                <x-input-error for="editing.traitementDossiers" class="mt-2" />
+                class="block mb-2 text-xl font-medium text-gray-900 ">Traitement de dossiers</label>
+            <select id="editing.traitementDossiers" wire:model.defer="editing.traitementDossiers"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                  <option value="">Selectionner le status</option>
+                <option value="En cours">En cours</option>
+                <option value="Validé">Validé</option>
+                <option value="Non Validé">Non Validé</option>
+            </select>
+            <x-input-error for="editing.traitementDossiers" class="mt-2" />
+               </div>
+
+               <div class="flex-1  ">
+                <div class="flex mt-10">
+                    <label class="inline-flex items-center mt-3 me-3">
+                        <input type="radio" class="form-radio h-5 w-5 text-blue-600" name="gender" value="en_cours" @if(isset($editing['traitementDossiers']) && $editing['traitementDossiers'] === "En cours") checked @endif>
+                        <span class="ml-2">Non Traité</span>
+                    </label>
+
+                    <label class="inline-flex items-center mt-3 me-3">
+                        <input type="radio" class="form-radio h-5 w-5 text-blue-600" name="gender" value="non_traite" @if(isset($editing['traitementDossiers']) && $editing['traitementDossiers'] !== "En cours") checked @endif>
+                        <span class="ml-2">Traité</span>
+                    </label>
+                </div>
+
+                {{--  <div class="flex mt-10">
+                     @if(isset($editing['traitementDossiers']))
+
+                        @if($editing['traitementDossiers']==="En cours")
+                        <label class="inline-flex items-center mt-3 me-3">
+                            <input type="radio" class="form-radio h-5 w-5 text-blue-600" name="gender" value="male" selected>
+                            <span class="ml-2">Non Traité</span>
+                        </label>
+
+                        @else
+                        <label class="inline-flex items-center mt-3 me-3">
+                            <input type="radio" class="form-radio h-5 w-5 text-blue-600" name="gender" value="male"selected >
+                            <span class="ml-2">Non Traité</span>
+                        </label>
+
+                        @endif
+                      @endif
+
+
+                  </div>  --}}
+
+               </div>
             </div>
 
             <div class="mt-4">
+                <div class="flex space-x-4">
 
-                <label for="editing.evaluation"
-                    class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">Certification</label>
-                <select id="editing.evaluation" wire:model.defer="editing.evaluation"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value="Non Evaluer">Selectionner un certification de digitalis</option>
-                    <option value="Non Evaluer">Non Evaluer</option>
-                    <option value="Evaluer">Evaluer</option>
-                </select>
-                <x-input-error for="editing.evaluation" class="mt-2" />
+                    <div class=" flex-1">
+                         <label for="editing.evaluation"
+                        class="block mb-2 text-xl font-medium text-gray-900 ">Certification</label>
+                    <select id="editing.evaluation" wire:model.defer="editing.evaluation"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                        <option value="Non Evaluer">Selectionner un certification de digitalis</option>
+                        <option value="Non Evaluer">Non Evaluer</option>
+                        <option value="Evaluer">Evaluer</option>
+                    </select>
+                    <x-input-error for="editing.evaluation" class="mt-2" /></div>
+
+                   <div class="flex-1">
+                    <label for="editing.notes"
+                    class="block mb-2 text-xl font-medium text-gray-900 ">Notes</label>
+
+                     <x-input type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="{{ __('NOTES') }}" x-ref="editing.notes" wire:model.defer="editing.notes" />
+
+                    <x-input-error for="editing.notes" class="mt-2" />
+
+                </div>
+                </div>
+
             </div>
 
         </x-slot>
@@ -339,7 +412,7 @@
             </x-secondary-button>
 
             <x-danger-button class="ml-3" wire:click="save" wire:loading.attr="disabled">
-                {{ __('Enregistrer') }}
+                {{ __('Traiter') }}
             </x-danger-button>
         </x-slot>
     </x-dialog-modal>

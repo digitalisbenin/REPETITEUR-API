@@ -1,5 +1,5 @@
 
-<nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+<nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 ">
     <!-- Primary Navigation Menu -->
     <div class="max-w-9xl mx-1 px-1 sm:px-1 lg:px-1">
         <div class="flex justify-between h-16 ">
@@ -7,7 +7,7 @@
                 <div class="flex items-center justify-start">
                     <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
                         type="button"
-                        class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                        class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 ">
                         <span class="sr-only">Open sidebar</span>
                         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
@@ -19,7 +19,7 @@
                     <a href="/" class="flex ml-2 md:mr-24">
                         <img src="image/logo.png" class="h-14 mr-3" alt="Top" />
                         <span
-                            class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">REPETITEUR</span>
+                            class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap "></span>
                     </a>
                 </div>
             </div>

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->enum('type', ['demande','paiement','repetiteur','message','payer']);
+            $table->enum('type', ['demande','paiement','repetiteur','message','payer','reponse']);
             $table->uuid('repetiteur_id')->nullable();
             $table->uuid('demande_id')->nullable();
             $table->uuid('payement_id')->nullable();

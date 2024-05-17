@@ -18,14 +18,17 @@ use App\Http\Livewire\ShowEcole;
 use App\Http\Livewire\ShowEvaluation;
 use App\Http\Livewire\ShowLibrairie;
 use App\Http\Livewire\ShowMessage;
+use App\Http\Livewire\ShowPresenceauposte;
 use App\Http\Livewire\ShowPublicites;
 use App\Http\Livewire\ShowRepetiteurMatiereClasses;
 use App\Http\Livewire\ShowTarifications;
+use App\Http\Livewire\ShowAppreciations;
 use App\Models\Repetiteur;
 use App\Models\Enfants;
 use App\Models\Demande;
 use App\Models\Ecole;
 use App\Models\Librairie;
+use App\Models\Appreciations;
 
 
 
@@ -77,6 +80,8 @@ Route::middleware([
     Route::get('/show-parents', ShowParents::class)->name('show-parents');
     Route::get('/show-publicites', ShowPublicites::class)->name('show-publicites');
     Route::get('/show-repetiteurs', ShowRepetiteurs::class)->name('show-repetiteurs');
+    Route::get('/show-presenceauposte', ShowPresenceauposte::class)->name('show-presenceauposte');
+    Route::get('/show-appreciations', ShowAppreciations::class)->name('show-appreciations');
     Route::get('/show-details-repetiteur/{id}', ShowDetailsRepetiteur::class)->name('show-details-repetiteur');
 
 

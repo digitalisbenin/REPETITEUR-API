@@ -15,9 +15,17 @@ class UserController extends ApiController
                   /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new UserCollection(User::all());
+        $query = User::query();
+        if ($request->has('name')) {
+            $query->where('name', $request->input('name'));
+        }
+
+        $user = $query->latest('created_at')->get();
+
+        return new UserCollection($user);
+       // return new UserCollection(User::all());
     }
 
     /**
@@ -34,7 +42,7 @@ class UserController extends ApiController
      * Display the specified resource.
      */
     public function show(User $roles)
-    {   
+    {
         return new UserResource($roles);
     }
 

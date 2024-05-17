@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Message\StoreMessageRequest;
 use App\Http\Requests\Message\UpdateMessageRequest;
 use App\Http\Resources\Message\MessageCollection;
+use App\Http\Resources\Message\MessageResource;
 use App\Http\Resources\Message\MessageRessource;
 use App\Models\Message;
 use Illuminate\Http\Request;
@@ -17,9 +18,16 @@ class MessageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new MessageCollection(Message::all());
+        $query = Message::query();
+
+        if ($request->has('user_id')) {
+            $query->where('user_id', $request->input('user_id'));
+        }
+
+        $message = $query->latest('created_at')->get();
+        return new MessageCollection( $message) ;
     }
 
     /**
@@ -29,7 +37,7 @@ class MessageController extends Controller
     {
         $message = Message::create($request->all());
 
-        return new MessageRessource($message);
+        return new MessageResource($message);
     }
 
     /**
@@ -38,7 +46,7 @@ class MessageController extends Controller
     public function show( $id )
     {
         $message = Message::find($id);
-        return new MessageRessource($message);
+        return new MessageResource($message);
     }
 
     /**
@@ -49,7 +57,7 @@ class MessageController extends Controller
         $message = Message::find($id);
         $message->update($request->all());
 
-        return new MessageRessource($message);
+        return new MessageResource($message);
     }
 
     /**

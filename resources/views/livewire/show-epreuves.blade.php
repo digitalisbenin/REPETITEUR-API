@@ -9,19 +9,19 @@
     <div class="flex items-center justify-between pb-4">
 
         <div class="">
-            <label for="table-search" class="block mb-2 text-3xl font-medium text-gray-900 dark:text-white">Liste des épreuves</label>
+            <label for="table-search" class="block mb-2 text-3xl uppercase  font-medium text-gray-900 ">Liste des épreuves</label>
 
 
         </div>
         <div>
-            <button wire:click="create" type="button" class="inline-flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"><svg class="w-[14px] h-[14px] text-white dark:text-white mt-1 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+            <button wire:click="create" type="button" class="inline-flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 "><svg class="w-[14px] h-[14px] text-white  mt-1 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 1v16M1 9h16" />
                 </svg>Ajouter</button>
         </div>
     </div>
 
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <table class="w-full text-sm text-left text-gray-500 ">
+        <thead class="text-lg text-gray-700 uppercase bg-gray-50 ">
             <tr>
 
                 <th scope="col" class="px-6 py-3">
@@ -43,7 +43,7 @@
         </thead>
         <tbody>
             @foreach ($epreuves as $epreuve)
-            <tr class="bg-white text-lg border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-lg">
+            <tr class="bg-white text-lg border-b  text-lg">
 
 
                 <td class="px-6 py-4">
@@ -54,8 +54,11 @@
                 <td class="px-6 py-4">
                     {{ $epreuve->classe->name }}
                 </td>
-                <td class="px-6 py-4">
-                    <a href=" {{ $epreuve->corrige }}" target="_blank" class="text-green-500">Télécharger</a>
+                <td class="px-6 py-4" >
+                    {{--  <a href=" {{ $epreuve->corrige }}" target="_blank" class="text-green-500">Télécharger</a>  --}}
+                    @if(!empty($epreuve->corrige))
+                    <a href="{{ $epreuve->corrige }}" target="_blank" class="text-green-500">Télécharger</a>
+                @endif
 
                 </td>
                 <td class="px-6 py-4">
@@ -64,8 +67,8 @@
 
 
                 <td class="flex items-center px-6 py-4 space-x-3">
-                    <a href="#" wire:click="edit({{ $epreuve }})" wire:loading.attr="disabled" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Modifier</a>
-                    <a href="#" wire:click="delete({{ $epreuve }})" wire:loading.attr="disabled" class="font-medium text-red-600 dark:text-red-500 hover:underline">Supprimer</a>
+                    <a href="#" wire:click="edit({{ $epreuve }})" wire:loading.attr="disabled" class="font-medium text-blue-600  hover:underline">Modifier</a>
+                    <a href="#" wire:click="delete({{ $epreuve }})" wire:loading.attr="disabled" class="font-medium text-red-600  hover:underline">Supprimer</a>
                 </td>
             </tr>
             @endforeach
@@ -81,7 +84,7 @@
 
         <x-slot name="content">
             <div class="p-6 text-center">
-                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
                 {{ __('Êtes-vous sûr que vous souhaitez supprimer? Cette action est irréversible.') }}
@@ -112,13 +115,13 @@
                 <x-input-error for="editing.name" class="mt-2" />
             </div>  --}}
             <div class="mt-4">
-                <label for="editing.epreuve" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">ENTRER UNE EPREUVE</label>
+                <label for="editing.epreuve" class="block mb-2 text-xl font-medium text-gray-900 ">ENTRER UNE EPREUVE</label>
                 <x-input type="file" wire:model="file" class="mt-1 block w-full text-xl" placeholder="{{ __('EPREUVE') }}"  />
 
                 <x-input-error for="editing.epreuve" class="mt-2" />
             </div>
             <div class="mt-4">
-                <label for="editing.corrige" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">LE CORRIGE DE L EPREUVE</label>
+                <label for="editing.corrige" class="block mb-2 text-xl font-medium text-gray-900 ">LE CORRIGE DE L EPREUVE</label>
                 <x-input type="file" wire:model="pdffile" class="mt-1 block w-full text-xl" placeholder="{{ __('CORRIGE') }}" />
 
                 <x-input-error for="editing.corrige" class="mt-2" />
@@ -127,8 +130,8 @@
 
             <div class="mt-4">
 
-                <label for="editing.matiere_id" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">MATIERE</label>
-                <select id="editing.matiere_id" wire:model.defer="editing.matiere_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <label for="editing.matiere_id" class="block mb-2 text-xl font-medium text-gray-900 ">MATIERE</label>
+                <select id="editing.matiere_id" wire:model.defer="editing.matiere_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                     <option selected>Selectionnez la matiere</option>
                     @foreach ($matiere as $matier)
                     <option value="{{ $matier->id }}">{{ $matier->name }}</option>
@@ -140,8 +143,8 @@
             </div>
             <div class="mt-4">
 
-                <label for="editing.classe_id" class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">CLASSE</label>
-                <select id="editing.classe_id" wire:model.defer="editing.classe_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <label for="editing.classe_id" class="block mb-2 text-xl font-medium text-gray-900 ">CLASSE</label>
+                <select id="editing.classe_id" wire:model.defer="editing.classe_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                     <option selected>Selectionnez la classe</option>
                     @foreach ($classe as $matiere)
                     <option value="{{ $matiere->id }}">{{ $matiere->name }}</option>
@@ -155,9 +158,9 @@
             <div class="mt-4">
 
                 <label for="editing.type"
-                    class="block mb-2 text-xl font-medium text-gray-900 dark:text-white">TYPE</label>
+                    class="block mb-2 text-xl font-medium text-gray-900 ">TYPE</label>
                 <select id="editing.type" wire:model.defer="editing.type"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                     <option value="Epreuves">Selectionner le type</option>
                     <option value="Epreuves">Epreuves</option>
                     <option value="Examens">Examens</option>

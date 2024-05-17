@@ -19,12 +19,12 @@ return new class extends Migration
             $table->uuid('demande_id')->nullable();
             $table->uuid('parents_id')->nullable();
             $table->uuid('repetiteur_id')->nullable();
-            $table->string('appreciation_parents',255)->nullable();
-            $table->string('appreciation_repetiteur',255)->nullable();
-            $table->string('reponse_admin',255)->nullable();
-            $table->string('reponse_parents',255)->nullable();
-            $table->string('poste')->nullable();
-            $table->string('message')->nullable();
+            $table->longText('appreciation_parents',255)->nullable();
+            $table->longText('appreciation_repetiteur',255)->nullable();
+            $table->longText('reponse_admin',255)->nullable();
+            $table->longText('reponse_parents',255)->nullable();
+            $table->longText('poste')->nullable();
+            $table->longText('message')->nullable();
             $table->string('objet')->nullable();
             $table->timestamps();
 

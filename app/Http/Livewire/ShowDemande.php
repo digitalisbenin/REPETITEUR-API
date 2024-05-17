@@ -8,11 +8,11 @@ use App\Models\Tarification;
 use App\Models\Enfants;
 use App\Models\Repetiteur;
 use Livewire\Component;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 class ShowDemande extends Component
 {
 
-
+    use LivewireAlert;
     public Demande $deleting;
     public Demande $editing;
     public $showDeleteModal = false;
@@ -25,7 +25,7 @@ class ShowDemande extends Component
         return [
 
             'editing.status' => 'required|min:1',
-            'editing.motif' => 'required|min:1',
+            'editing.motif' => 'nullable',
             'editing.enfants_id' => 'required',
             'editing.tarification_id' => 'required',
             'editing.repetiteur_id' => 'required',
@@ -43,7 +43,7 @@ class ShowDemande extends Component
     public function edit(Demande $demande)
     {
         $this->editing = $demande;
-        $this->action = 'Valider une demande';
+        $this->action = 'Traitement de la demande...';
         $this->showEditModal = true;
     }
     public function create()
@@ -65,7 +65,12 @@ class ShowDemande extends Component
     {
         $this->validate();
         $this->editing->save();
-        $this->notify('Enregistrement effectué avec succès');
+       // $this->notify('Enregistrement effectué avec succès');
+        $this->alert('success', 'Enregistrement effectué avec succès', [
+            'position' => 'top-end',
+            'timer' => 5000,
+            'toast' => true,
+           ]);
         $this->showEditModal = false;
     }
     public function notify($message)

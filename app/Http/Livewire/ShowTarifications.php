@@ -7,9 +7,11 @@ use App\Models\Matiere;
 use App\Models\Tarification;
 use Livewire\Component;
 use Illuminate\Support\Facades\Session;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 class ShowTarifications extends Component
 {
 
+    use LivewireAlert;
     public Tarification $deleting;
     public Tarification $editing;
     public $showDeleteModal = false;
@@ -52,14 +54,24 @@ class ShowTarifications extends Component
 
         $this->showDeleteModal = false;
 
-        $this->notify('Vous avez supprimé une Tarification');
+        //$this->notify('Vous avez supprimé une Tarification');
+        $this->alert('success', 'Vous avez supprimé une tarification', [
+            'position' => 'top-end',
+            'timer' => 5000,
+            'toast' => true,
+           ]);
     }
 
     public function save()
     {
         $this->validate();
         $this->editing->save();
-        $this->notify('Enregistrement effectué avec succès');
+       // $this->notify('Enregistrement effectué avec succès');
+       $this->alert('success', 'Enregistrement effectué avec succès', [
+        'position' => 'top-end',
+        'timer' => 5000,
+        'toast' => true,
+       ]);
         $this->showEditModal = false;
     }
     public function notify($message)

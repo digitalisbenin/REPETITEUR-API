@@ -9,6 +9,7 @@
         "aws/aws-sdk-php": "^3.283",
         "fruitcake/laravel-cors": "^3.0",
         "guzzlehttp/guzzle": "^7.2",
+        "jantinnerezo/livewire-alert": "^3.0",
         "laravel/framework": "^9.19",
         "laravel/jetstream": "^3.0",
         "laravel/sanctum": "^3.0",
