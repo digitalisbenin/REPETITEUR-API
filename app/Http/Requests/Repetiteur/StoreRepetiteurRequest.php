@@ -25,11 +25,11 @@ class StoreRepetiteurRequest extends FormRequest
     public function rules():array
     {
         return [
-            'phone' => 'required',
+
             'description' => 'required',
             'sexe' => 'required',
             'grade' => 'required',
-             'user_id' => 'required',
+             'user_id' => 'required|unique:users,id',
 
         ];
     }

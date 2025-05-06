@@ -58,10 +58,10 @@
                     <path
                         d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
                 </svg>
-                    <span class="flex-1 ml-3 whitespace-nowrap text-lg">Répétiteurs</span>
+                    <span class="flex-1 ml-3 whitespace-nowrap text-lg">Encadreurs</span>
                 </a>
             </li>
-            
+
             <li>
                 <a href="{{ route('show-presenceauposte') }}"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -76,7 +76,7 @@
                 </a>
             </li>
 
-          
+
 
 
 
@@ -108,7 +108,7 @@
                     </svg>
                     <span class="ml-3 text-lg">Appréciations</span>
                 </a>
-            </li> 
+            </li>
              <li>
                 <a href="{{ route('show-appreciations') }}"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">

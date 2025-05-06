@@ -29,7 +29,7 @@ use App\Http\Controllers\Api\V1\TarificationController;
 use App\Http\Controllers\Api\V1\RepetiteurMatiereClasseController;
 use App\Http\Controllers\Api\V1\AppreciationsController;
 use App\Models\Role;
-
+use App\Http\Controllers\Api\V1\CondictionController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -205,7 +205,8 @@ Route::get('/parents/{id}', [ParentsController::class, 'show']);
 //route pour repetiteur
 Route::get('/repetiteurs', [RepetiteurController::class, 'index']);
 Route::get('/repetiteurs/{id}', [RepetiteurController::class, 'show']);
-
+Route::get('/condictions', [CondictionController::class, 'index']);
+    Route::post('/condictions',[CondictionController::class, 'store']);
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });

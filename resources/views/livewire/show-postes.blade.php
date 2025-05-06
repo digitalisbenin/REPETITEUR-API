@@ -7,14 +7,14 @@
             </div>
         @endif
     </div>
-    <label for="table-search" class="block mb-2 text-3xl uppercase  font-medium text-gray-900 ">Appréciations du Répétiteur</label>
+    <label for="table-search" class="block mb-2 text-3xl uppercase  font-medium text-gray-900 ">Appréciations de l' encadreur</label>
 
     <table class="w-full text-sm text-left text-gray-500 ">
         <thead class="text-lg text-gray-700 uppercase bg-gray-50">
             <tr>
 
                 <th scope="col" class="px-6 py-3">
-                    REPETITEUR
+                    ENCADREURS
                 </th>
                 {{--  <th scope="col" class="px-6 py-3">
                     PRESENCE AU POSTE

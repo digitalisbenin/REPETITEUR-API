@@ -1,6 +1,6 @@
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-white p-4">
     <div class=" max-w-6xl px-4 py-4 mx-auto lg:py-8 md:px-6 ">
-        <div class="flex justify-between"> 
+        <div class="flex justify-between">
             @if(!empty($repetiteur->profil_imageUrl))
             <img src="{{ $repetiteur->profil_imageUrl }}" alt="" class="object-cover lg:h-64 rounded ">
         @else
@@ -12,18 +12,18 @@
                 <button wire:click="edit({{ $repetiteur }})" type="button" class="inline-flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2  ">
                     Traiter</button>
                   {{--  <x-secondary-button wire:click="edit({{ $repetiteur }})" wire:loading.attr="disabled" class="  ">{{('Traiter')}}</x-secondary-button>  --}}
-                      
+
                   @endif</div>
-            
+
         </div>
         <div class="relative mb-6 lg:mb-10 lg:h-2/4  rounded-lg">
-       
 
-            
 
-    
-            
-       
+
+
+
+
+
       {{--  <div class="flex flex-wrap -mx-4">
             <div class="w-full px-4 md:w-1/4  ">
                 <div class="sticky top-0 z-50 overflow-hidden ">
@@ -106,8 +106,8 @@
 
                 <button wire:click="edit({{ $repetiteur }})" type="button" class="inline-flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2  ">
                     Traiter</button>
-                    <x-secondary-button wire:click="edit({{ $repetiteur }})" wire:loading.attr="disabled" class="  ">{{('Traiter')}}</x-secondary-button>  
-                      
+                    <x-secondary-button wire:click="edit({{ $repetiteur }})" wire:loading.attr="disabled" class="  ">{{('Traiter')}}</x-secondary-button>
+
                   @endif
                   <div class="relative mb-6 lg:mb-10 lg:h-2/4  rounded-lg">
                      <span class="text-2xl font-medium text-black-500 ">Autres informations </span>
@@ -132,7 +132,7 @@
 
               </div>
           </div>
-        </div> 
+        </div>
     </div>  --}}
 
  <x-dialog-modal wire:model="showEditModal" maxWidth="2xl">
@@ -291,7 +291,7 @@
             <div class="mt-4">
 
                 <label for="editing.status"
-                    class="block mb-2 text-xl font-medium text-gray-900 ">STATUS</label>
+                    class="block mb-2 text-xl font-medium text-gray-900 ">STATUT</label>
                 <select id="editing.status" wire:model.defer="editing.status"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                     {{--  <option value="Etudiants">Selectionner le status</option>  --}}
@@ -311,19 +311,19 @@
                             <input id="en_cours" type="radio" class="form-radio h-5 w-5 text-blue-600" name="traitementDossiers" value="En cours" wire:model="editing.traitementDossiers">
                             <span class="ml-2 text-xl">En cours</span>
                         </label>
-                
+
                         <label class="inline-flex items-center mt-1 me-6">
                             <input id="valide" type="radio" class="form-radio h-5 w-5 text-blue-600" name="traitementDossiers" value="Validé" wire:model="editing.traitementDossiers">
                             <span class="ml-2 text-xl">Validé</span>
                         </label>
-                
+
                         <label class="inline-flex items-center mt-1 me-6">
                             <input id="non_valide" type="radio" class="form-radio h-5 w-5 text-blue-600" name="traitementDossiers" value="Non Validé" wire:model="editing.traitementDossiers">
                             <span class="ml-2 text-xl">Non Validé</span>
                         </label>
                     </div>
                 </div>
-                
+
 
                {{--  <div class="flex-1">
                 <label for="editing.traitementDossiers"
@@ -345,7 +345,7 @@
                     <label class="inline-flex items-center mt-1 me-6">
                         <input type="radio" class="form-radio h-5 w-5 text-blue-600" name="gender" value="En cours" @if(isset($editing['traitementDossiers']) && $editing['traitementDossiers'] === "En cours") checked @endif>
                         <span class="ml-2 text-xl">En cours</span>
-                        
+
                     </label>
 
                     <label class="inline-flex items-center mt-1 me-6">
@@ -423,12 +423,12 @@
     </x-dialog-modal>
 
 
-    
 
-       
-       
-      
-       
+
+
+
+
+
       <div class=" mx-10">
         <table class="w-full table-responsive text-sm text-left text-gray-500">
             <thead class="text-xl text-gray-700 uppercase bg-gray-100">
@@ -436,7 +436,7 @@
                     <th scope="col" class="px-6 py-3 text-center " colspan="2">
                         Informations Personnels
                     </th>
-                    
+
                 </tr>
             </thead>
             <tbody>
@@ -447,7 +447,7 @@
                     <td class="px-6 py-4">
                       {{ $repetiteur->user->name}}
                     </td>
-                    
+
                 </tr>
                 <tr class="bg-white text-lg border-b ">
                   <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
@@ -456,7 +456,7 @@
                   <td class="px-6 py-4">
                     {{ $repetiteur->commune->name}}
                   </td>
-                  
+
               </tr>
               <tr class="bg-white text-lg border-b ">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
@@ -465,7 +465,7 @@
                 <td class="px-6 py-4">
                   {{ $repetiteur->adresse}}
                 </td>
-                
+
             </tr>
             <tr class="bg-white text-lg border-b ">
               <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
@@ -474,9 +474,9 @@
               <td class="px-6 py-4">
                 {{ $repetiteur->situationMatrimoniale }}
               </td>
-    
-            
-              
+
+
+
           </tr>
         </tbody>
         </table>
@@ -486,10 +486,10 @@
                   <th scope="col" class="px-6 py-3 text-center " colspan="2">
                       Informations Générals
                   </th>
-                  
+
               </tr>
           </thead>
-          
+
           <tr class="bg-white text-lg border-b ">
             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                 Matricule
@@ -497,7 +497,7 @@
             <td class="px-6 py-4">
               {{ $repetiteur->matricule }}
             </td>
-            
+
         </tr>
         <tr class="bg-white text-lg border-b ">
           <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
@@ -510,7 +510,7 @@
 
      @endforeach
           </td>
-          
+
       </tr>
       <tr class="bg-white text-lg border-b ">
         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
@@ -523,7 +523,7 @@
 
    @endforeach
         </td>
-        
+
     </tr>
     <tr class="bg-white text-lg border-b ">
       <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
@@ -532,7 +532,7 @@
       <td class="px-6 py-4">
         {{ $repetiteur->heureDisponibilite }}
       </td>
-      
+
     </tr>
     <tr class="bg-white text-lg border-b ">
       <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
@@ -541,7 +541,7 @@
       <td class="px-6 py-4">
         {{ $repetiteur->status }}
       </td>
-      
+
     </tr>
     <tr class="bg-white text-lg border-b ">
       <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
@@ -550,7 +550,7 @@
       <td class="px-6 py-4">
         {{  $repetiteur->description }}
       </td>
-      
+
     </tr>
     </table>
     <table class="w-full table-responsive text-sm text-left text-gray-500">
@@ -559,19 +559,19 @@
             <th scope="col" class="px-6 py-3 text-center" colspan="2" >
                 Autres informations
             </th>
-            
+
         </tr>
     </thead>
-    
-    <tr class="bg-white text-lg border-b ">
+
+    {{--  <tr class="bg-white text-lg border-b ">
       <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
         Ecole de provenence
       </th>
       <td class="px-6 py-4">
         {{ $repetiteur->ecole }}
       </td>
-      
-    </tr>
+
+    </tr>  --}}
     <tr class="bg-white text-lg border-b ">
       <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
         Cycle
@@ -579,16 +579,16 @@
       <td class="px-6 py-4">
         {{ $repetiteur->cycle}}
       </td>
-      
+
     </tr>
     <tr class="bg-white text-lg border-b ">
       <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-        Grade
+        Statut de l'encadreur
       </th>
       <td class="px-6 py-4">
         {{ $repetiteur->grade }}
       </td>
-      
+
     </tr>
     <tr class="bg-white text-lg border-b ">
       <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
@@ -597,7 +597,7 @@
       <td class="px-6 py-4">
         {{ $repetiteur->niveauEtude }}
       </td>
-      
+
     </tr>
     <tr class="bg-white text-lg border-b ">
       <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
@@ -606,7 +606,7 @@
       <td class="px-6 py-4">
         {{ $repetiteur->etats }}
       </td>
-      
+
     </tr><tr class="bg-white text-lg border-b ">
       <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
         Evaluer par digitalis
@@ -614,7 +614,7 @@
       <td class="px-6 py-4">
         {{ $repetiteur->evaluation }}
       </td>
-      
+
     </tr>
     <tr class="bg-white text-lg border-b ">
       <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
@@ -623,7 +623,7 @@
       <td class="px-6 py-4">
         {{ $repetiteur->experience }}
       </td>
-      
+
     </tr>
     <tr class="bg-white text-lg border-b ">
         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
@@ -632,8 +632,8 @@
         <td class="px-6 py-4">
             <a class="text-blue-600 text-xl" target="blank" href="{{ $repetiteur->diplome_imageUrl }}">Télécharger</a>
         </td>
-        
-      </tr> 
+
+      </tr>
       <tr class="bg-white text-lg border-b ">
         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
             La pièces d'identité:
@@ -641,16 +641,16 @@
         <td class="px-6 py-4">
             <a class="text-blue-600 text-xl" target="blank" href="{{ $repetiteur->identite }}">Télécharger</a>
         </td>
-        
+
       </tr>
-      <tr class="bg-white text-lg border-b ">
+      {{--  <tr class="bg-white text-lg border-b ">
         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
             L'attestation de résidence:
         </th>
         <td class="px-6 py-4">
             <a class="text-blue-600 text-xl" target="blank" href="{{ $repetiteur->attestationResidence }}">Télécharger</a>
         </td>
-        
+
       </tr>
       <tr class="bg-white text-lg border-b ">
         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
@@ -659,15 +659,15 @@
         <td class="px-6 py-4">
             <a class="text-blue-600 text-xl" target="blank" href="{{ $repetiteur->casierJudiciaire }}">Télécharger</a>
         </td>
-        
-      </tr>
+
+      </tr>  --}}
 
 
 
-           
+
         </table>
-    
-       
+
+
     </div>
 </div>
 

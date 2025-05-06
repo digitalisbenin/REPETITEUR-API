@@ -44,9 +44,9 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($demande as $keys =>   $enfant)
+            @foreach ($demande as $keys => $enfant)
             <tr class="text-lg bg-white border-b   hover:bg-gray-50 ">
-                
+
                 <th scope="row"
                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                 {{ $keys + 1 }}
@@ -203,7 +203,7 @@
             </div>
             <div class="mt-4">
 
-                <label for="editing.repetiteur_id" class="block mb-2 text-xl font-medium text-gray-900 ">REPETITEUR SOLLICITE</label>
+                <label for="editing.repetiteur_id" class="block mb-2 text-xl font-medium text-gray-900 ">ENCADREUR SOLLICITE</label>
 
                  @if(isset($editing['repetiteur_id']))
                             @foreach($repetiteurs as $matier)
@@ -242,12 +242,12 @@
                         <input id="en_cours" type="radio" class="form-radio h-5 w-5 text-blue-600" name="status" value="En cours" wire:model="editing.status">
                         <span class="ml-2 text-xl">En cours</span>
                     </label>
-            
+
                     <label class="inline-flex items-center mt-1 me-6">
                         <input id="valide" type="radio" class="form-radio h-5 w-5 text-blue-600" name="status" value="Validé" wire:model="editing.status">
                         <span class="ml-2 text-xl">Validé</span>
                     </label>
-            
+
                     <label class="inline-flex items-center mt-1 me-6">
                         <input id="non_valide" type="radio" class="form-radio h-5 w-5 text-blue-600" name="status" value="Non Validé" wire:model="editing.status">
                         <span class="ml-2 text-xl">Non Validé</span>
@@ -255,7 +255,7 @@
                 </div>
                 <x-input-error for="editing.status" class="mt-2" />
             </div>
-            
+
 
 
             <div class="mt-4">

@@ -6,7 +6,7 @@
             </div>
         @endif
     </div>
-    <label for="table-search" class="block mb-2 text-3xl font-medium text-gray-900 uppercase ">Liste des répétiteurs</label>
+    <label for="table-search" class="block mb-2 text-3xl font-medium text-gray-900 uppercase ">Liste des encadreurs</label>
 
 
     <table class="w-full text-sm text-left text-gray-500 ">
@@ -28,7 +28,7 @@
                     ADRESSES
                 </th>  --}}
                 <th scope="col" class="px-6 py-3">
-                    Status
+                    Statut
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -48,7 +48,7 @@
                     {{ $repetiteur->user->name }}
                 </th>
                 <td class="px-6 py-4">
-                    {{ $repetiteur->phone }}
+                    {{ $repetiteur->user->phone }}
                 </td>
                 <td class="px-6 py-4">
                     @foreach($repetiteur->matieresClasses as $matiereClasse)

@@ -52,6 +52,9 @@
                     Email
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Téléphone
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Role
                 </th>
                 {{--  <th scope="col" class="px-6 py-3">
@@ -69,6 +72,9 @@
                     </th>
                     <td class="px-6 py-4">
                         {{ $user->email }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $user->phone }}
                     </td>
                     <td class="px-6 py-4">
                         {{ $user->role->name }}

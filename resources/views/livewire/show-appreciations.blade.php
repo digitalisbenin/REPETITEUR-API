@@ -27,7 +27,7 @@
                      APPRECIE
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    REPETITEUR
+                    ENCADREUR
                 </th>
                 {{--  <th scope="col" class="px-6 py-3">
                     Réponse Parents
@@ -124,7 +124,7 @@
 
                 <label for="editing.appreciation_parents"
                     class="block mb-2 text-lg font-medium text-gray-900 ">Apprécitions du parents</label>
-                    <x-input disabled type="text" readonly class="mt-1 block w-full text-xl" placeholder="{{ __('Appréciations du parents') }}" x-ref="editing.appreciation_parents"
+                    <x-input disabled type="text" readonly class="mt-1 block w-full text-xl" wire:model.defer="editing.appreciation_parents"  placeholder="{{ __('Appréciations du parents') }}" x-ref="editing.appreciation_parents"
                     wire:model.defer="editing.appreciation_parents" />
 
 

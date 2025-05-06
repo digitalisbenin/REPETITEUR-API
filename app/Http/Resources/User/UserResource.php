@@ -28,6 +28,7 @@ class UserResource extends JsonResource
         'phone'=>$this->phone,
         'role'=> new RoleResource($this->role),
         'email'=>$this->email,
+        'two_factor_secret'=>$this->two_factor_secret,
         'email_verified_at'=>$this->email_verified_at,
         'created_at'=>$this->created_at,
         'updated_at'=>$this->updated_at,

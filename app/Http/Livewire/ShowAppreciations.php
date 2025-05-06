@@ -28,8 +28,9 @@ class ShowAppreciations extends Component
     public function rules()
     {
         return [
+            'editing.appreciation_parents' => 'nullable',
             'editing.reponse_admin' => 'required|min:2',
-            
+
 
             //'editing.user_id' => 'required',
 
@@ -78,7 +79,7 @@ class ShowAppreciations extends Component
         $this->showEditModal = false;
     }
 
- 
+
 
     public function render()
     {

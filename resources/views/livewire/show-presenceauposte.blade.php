@@ -54,7 +54,7 @@
                         N°
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Répetiteur
+                        Encadreurs
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Mois

@@ -101,12 +101,13 @@ class ShowPublicites extends Component
     public function save()
     {
         $this->validate([
-            'file' => 'required|mimetypes:image/jpeg,image/png,image/jpg,video/webm,video/mp4,video/3gpp,audio/mpeg,audio/mp3,audio/wav|max:2048',
+            'file' => $this->editing->id ? 'nullable|mimetypes:image/jpeg,image/png,image/jpg,video/webm,video/mp4,video/3gpp,audio/mpeg,audio/mp3,audio/wav|max:20480' : 'required|mimetypes:image/jpeg,image/png,image/jpg,video/webm,video/mp4,video/3gpp,audio/mpeg,audio/mp3,audio/wav|max:20480',
             'editing.titre' => 'required|min:2',
         ]);
 
-
+        $url = null;
         $file = $this->file;
+        if($file){
 
         $name = time() . $file->getClientOriginalName();
         $fileType = $this->getFileType($file);
@@ -132,12 +133,16 @@ class ShowPublicites extends Component
         $url = $this->file->storePubliclyAs($path, $name, 's3');
 
         $url = "https://apibackout.s3.amazonaws.com/$url";
+        }
         if ($this->editing->id) {
             $publicite = Publicite::find($this->editing->id);
            // dd($this->editing->id);
             if ($publicite) {
                 $publicite->titre = $this->editing->titre;
-                $publicite->publiciteUrl = $url;
+                // $publicite->publiciteUrl = $url;
+                if (isset($url)) {
+                    $publicite->publiciteUrl = $url;
+                }
                 $publicite->save();
                 //$this->notify('Modification effectuée avec succès');
                 $this->alert('success', 'Modification effectuée avec succès', [

@@ -27,7 +27,7 @@ class RegisterRequest extends FormRequest
             'role_id' => 'required',
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'phone' => 'required',
+            'phone' => 'required|regex:/^[0-9]{8,15}$/|unique:users',
             'password' => 'required|min:8'
         ];
     }
@@ -40,4 +40,14 @@ class RegisterRequest extends FormRequest
             'data' => $validator->errors()
         ]));
     }
+    public function messages(): array
+{
+    return [
+        'phone.required' => 'Le numéro de téléphone est obligatoire.',
+        'phone.regex' => 'Le format du numéro de téléphone est invalide.',
+        'phone.unique' => 'Ce numéro de téléphone est déjà utilisé.',
+        // Autres messages personnalisés
+    ];
+}
+
 }

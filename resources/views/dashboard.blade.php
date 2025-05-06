@@ -46,7 +46,7 @@
               <div class="mt-4 flex items-end justify-between px-2">
                 <div>
 
-                  <span class="text-lg font-medium">Total des répétiteurs</span>
+                  <span class="text-lg font-medium">Total des encadreurs</span>
                 </div>
 
                 <span class="flex items-center gap-1 text-lg font-medium text-meta-3">

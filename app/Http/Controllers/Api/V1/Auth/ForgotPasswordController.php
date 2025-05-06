@@ -56,15 +56,15 @@ class ForgotPasswordController extends Controller
                 ]
             ], 400);
         } else {
-            if (!$user->hasVerifiedEmail()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => trans('messages.authorization_errors'),
-                    'data' => [
-                        trans('messages.email_not_verified'),
-                    ]
-                ], 403);
-            }
+            //if (!$user->hasVerifiedEmail()) {
+            //    return response()->json([
+              //      'success' => false,
+                //    'message' => trans('messages.authorization_errors'),
+                  //  'data' => [
+                    //    trans('messages.email_not_verified'),
+                    //]
+               // ], 403);
+            //}
             SendResetMessage::dispatch($user)->onQueue('emails');
 
             return response()->json([
